@@ -6,8 +6,8 @@ var ObjectId = Schema.ObjectId;
 var userSchema = new Schema({
     name: {type: String, default: ""},
     posts: [{type: ObjectId, ref: 'Post'}],
-    socket_id: String,
-    loc: {type: [Number], index: '2d'}
+    loc: {type: [Number], index: '2d'},
+    socket_id: String
 });
 
 mongoose.model('User', userSchema);
