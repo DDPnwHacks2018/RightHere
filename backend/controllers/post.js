@@ -48,13 +48,16 @@ exports.replyPost = function(req, res) {
     var post_id = req.query.post_id;
     
     User.find({name: username}, function(err, user) {
+        if (err) throw err;
         Post.find({_id: req.query.post_id}, function(err, post) {
+            if (err) throw err;
             var reply = {
                 text: req.query.text,
                 author: user,
                 post: post
             };
 
+            console.log(reply);
             // insert to db
             Reply.create(reply, function(err, re) {
                 if (err) throw err;
