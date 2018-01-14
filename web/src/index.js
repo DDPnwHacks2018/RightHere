@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/styles.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-import RightHere from './components/RightHere';
+import AppRouter from './routers/AppRouter';
+import {BrowserRouter,Route,Switch,Link,NavLink} from 'react-router-dom';
 
-ReactDOM.render(<RightHere/>, document.getElementById('root'));
+
+ReactDOM.render(<AppRouter/>, document.getElementById('app'));

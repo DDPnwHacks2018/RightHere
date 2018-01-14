@@ -8,7 +8,6 @@ export default class RightHere extends React.Component{
     render(){
         return(
             <div className="container">
-                <Header/>
                 <Post />
             </div>
         );
