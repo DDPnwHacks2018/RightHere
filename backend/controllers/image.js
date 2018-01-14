@@ -9,7 +9,7 @@ exports.uploadImages = function (images) {
     const retHash = [];
 
     for (let i = 0; i < images.length; i += 1) {
-      const data = images[i].imageURL.replace(/^data:image\/\w+;base64,/, '').replace(/\s/g, '+');
+      const data = images[i].replace(/^data:image\/\w+;base64,/, '').replace(/\s/g, '+');
       const pathMd5 = md5(data);
       const pathFolder = path.resolve(__dirname, '../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
       const buf = Buffer.from(data, 'base64');
