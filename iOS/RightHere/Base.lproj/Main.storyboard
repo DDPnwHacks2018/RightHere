@@ -145,11 +145,15 @@
                                     </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="n2c-Dy-43j" secondAttribute="bottom" id="047-Id-bji"/>
                                     <constraint firstItem="PTi-aU-oLo" firstAttribute="leading" secondItem="DIW-JB-gV8" secondAttribute="leading" constant="16" id="KrG-qC-y2A"/>
+                                    <constraint firstAttribute="trailing" secondItem="n2c-Dy-43j" secondAttribute="trailing" id="NC7-gu-U6t"/>
+                                    <constraint firstItem="PTi-aU-oLo" firstAttribute="leading" secondItem="DIW-JB-gV8" secondAttribute="leading" id="UOo-tl-yIo"/>
                                     <constraint firstAttribute="trailing" secondItem="PTi-aU-oLo" secondAttribute="trailing" constant="159" id="VpA-Vr-ELk">
                                         <variation key="heightClass=regular" constant="16"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="PTi-aU-oLo" secondAttribute="trailing" constant="16" id="Xli-cx-t19"/>
+                                    <constraint firstItem="n2c-Dy-43j" firstAttribute="top" secondItem="DIW-JB-gV8" secondAttribute="top" id="YwH-1n-Wai"/>
                                     <constraint firstItem="PTi-aU-oLo" firstAttribute="leading" secondItem="DIW-JB-gV8" secondAttribute="leading" constant="159" id="hAa-6W-EdB">
                                         <variation key="heightClass=regular" constant="16"/>
                                     </constraint>
@@ -157,9 +161,13 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="UOo-tl-yIo"/>
                                         <exclude reference="VpA-Vr-ELk"/>
                                         <exclude reference="hAa-6W-EdB"/>
                                         <exclude reference="tIB-PV-W1Z"/>
+                                        <exclude reference="047-Id-bji"/>
+                                        <exclude reference="NC7-gu-U6t"/>
+                                        <exclude reference="YwH-1n-Wai"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular">
@@ -175,23 +183,41 @@
                                         <exclude reference="tIB-PV-W1Z"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=compact-widthClass=compact" axis="horizontal">
+                                    <mask key="constraints">
+                                        <exclude reference="UOo-tl-yIo"/>
+                                        <include reference="047-Id-bji"/>
+                                        <include reference="NC7-gu-U6t"/>
+                                        <include reference="YwH-1n-Wai"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="n2c-Dy-43j" firstAttribute="bottom" secondItem="i3R-RY-E7j" secondAttribute="bottom" constant="16" id="JjC-ub-qtn"/>
                             <constraint firstItem="i3R-RY-E7j" firstAttribute="trailing" secondItem="DIW-JB-gV8" secondAttribute="trailing" constant="16" id="QIs-1q-A3k"/>
                             <constraint firstItem="i3R-RY-E7j" firstAttribute="trailing" secondItem="n2c-Dy-43j" secondAttribute="trailing" constant="16" id="V0s-rF-9WN"/>
+                            <constraint firstItem="DIW-JB-gV8" firstAttribute="bottom" secondItem="i3R-RY-E7j" secondAttribute="bottom" constant="328" id="WGv-vD-MNU">
+                                <variation key="heightClass=compact-widthClass=compact" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="n2c-Dy-43j" firstAttribute="top" secondItem="i3R-RY-E7j" secondAttribute="top" constant="16" id="c1J-FR-6W4"/>
                             <constraint firstItem="n2c-Dy-43j" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="cPA-Z0-Snk"/>
                             <constraint firstItem="DIW-JB-gV8" firstAttribute="top" secondItem="i3R-RY-E7j" secondAttribute="top" constant="32" id="e6l-Ys-SSS">
                                 <variation key="widthClass=compact" constant="16"/>
                                 <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                             </constraint>
                             <constraint firstItem="DIW-JB-gV8" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="gzk-br-98t"/>
+                            <constraint firstItem="DIW-JB-gV8" firstAttribute="bottom" secondItem="i3R-RY-E7j" secondAttribute="bottom" constant="328" id="oAT-kx-neq"/>
                             <constraint firstItem="n2c-Dy-43j" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="uVJ-kP-mzY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="i3R-RY-E7j"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="WGv-vD-MNU"/>
+                                <exclude reference="oAT-kx-neq"/>
+                                <exclude reference="JjC-ub-qtn"/>
+                                <exclude reference="c1J-FR-6W4"/>
                                 <exclude reference="uVJ-kP-mzY"/>
                             </mask>
                         </variation>
@@ -203,6 +229,15 @@
                         <variation key="widthClass=compact">
                             <mask key="constraints">
                                 <exclude reference="cPA-Z0-Snk"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="V0s-rF-9WN"/>
+                                <include reference="WGv-vD-MNU"/>
+                                <exclude reference="oAT-kx-neq"/>
+                                <exclude reference="JjC-ub-qtn"/>
+                                <exclude reference="c1J-FR-6W4"/>
                             </mask>
                         </variation>
                     </view>
