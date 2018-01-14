@@ -10,5 +10,4 @@ import {BrowserRouter,Route,Switch,Link,NavLink} from 'react-router-dom';
 
 //ReactDOM.render(<TestApp/>, document.getElementById('test'));
 
-
 ReactDOM.render(<AppRouter/>, document.getElementById('root'));
