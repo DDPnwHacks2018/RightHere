@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default class ProfileHeader extends React.Component{
     constructor(props){
@@ -10,18 +11,12 @@ export default class ProfileHeader extends React.Component{
         e.preventDefault();
         console.log("press");
     };
+
     render(){
         return(
-            <div className="container">
-                <ul className="nav nav-pills nav-justified">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/profile" onClick={this.handleSave}>Save</a>
-                    </li>
-                    
-                </ul>
+            <div className="container profileHeader">
+                    <button className="col-1 link-left btn btn-primary">Home</button>
+                    <button className="col-1 link-right btn btn-primary">Save</button>
             </div>
         );
     }
