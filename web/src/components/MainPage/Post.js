@@ -33,21 +33,21 @@ export default class Post extends React.Component {
                             <div className="col-4"> </div>
                         </div>
                         <div className="row postContent">
-                            <div className="col-10">{this.props.text}</div>
+                            <div className="col-12">{this.props.text}</div>
                         </div>
                         
                     </div>
                 </div>
                 <div className="row replyCreate">
-                    <div className="col-10">{this.props.comments}</div>
-                    
+                    <div className="col-10 reply">{this.props.comments} </div>
+                    <hr/>
                     <div className="col-10">
                         <textarea placeholder="Add Your Comment"></textarea>
                     </div>
                     <div className="col-2 sendBtn">
                         <button className="btn btn-primary" onClick={this.handleAddComment}><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                     </div>
-                    
+                  
                 </div>
             </div>
         );

@@ -1,5 +1,6 @@
 .body{
     font-family: "Montserrat", "Avenir";
+    background-color: #555555;
 }
 .container .link-left{
     float: left;
@@ -23,20 +24,27 @@
 }
 
 .Header{
-    background-color:#4682B4;
+    background-color:rgb(80, 149, 206);
+    opacity: 50%;
+    margin-bottom: 10px;
 }
 
 
 .btn-primary{
-    background-color:#4682B4;
-    border-color: #4682B4;
+    background-color:rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
     outline: none;
+    text-decoration: none;
 }
 
-.btn-primary:hover{
-    background-color: #4682B4;
-    border-color: #4682B4;
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:visited{
+    background-color: rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
     outline: none;
+    opacity: 50%;
 }
 
 .name-change{
@@ -50,7 +58,8 @@
     padding-top: 5px;
     padding-right: 0px;
     text-align: center;
-    margin-right: 50px;
+    margin-left: 50px;
+    margin-right: 10px;
 }
 .name-change input{
     margin-right: 15px;
@@ -58,8 +67,8 @@
 
 .name-change button{
     width: 60px;
-    background-color:#4682B4;
-    border-color: #4682B4;
+    background-color:rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
 }
 
 .container textarea{
@@ -79,11 +88,12 @@ img{
 .postContent{
     display: flex;
     justify-content: left;
-    height: 70px;
+    border-radius: 5px;
+    height: 50px;
 }
 
 .postHeader{
-    border-top: 1px solid rgba(0,0,0,0.2);
+    border-top: 2px solid rgba(0,0,0,0.2);
 }
 
 .replyCreate textarea{
@@ -92,7 +102,6 @@ img{
 .replyCreate button{
     position: relative;
     height: 30px;
-    /* bottom: -30px; */
     text-align: center;
     border: 0px;
     margin: 0px;
