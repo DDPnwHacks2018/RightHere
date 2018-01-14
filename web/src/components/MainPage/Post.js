@@ -3,8 +3,12 @@ import React from 'react';
 
 import './Post.css';
 
-export default function Post(props) {
-    /*
+export default class Post extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    
     handleAddComment = (e) => {
         e.preventDefault();
 
@@ -16,18 +20,15 @@ export default function Post(props) {
 
         e.target.elements.comment.value = '';
     };
-    */
-    return (
-        <div className="row post">
-            <div className="col">
-                <div className="row postHeader">
-                    <div className="col-4"> {props.time} </div>
-                    <div className="col-4"> </div>
-                    <div className="col-4"> </div>
-                </div>
-                <div className="row postText">
-                    <div className="col">
-                        {props.text}
+
+    render() {
+        return (
+            <div className="row post">
+                <div className="col">
+                    <div className="row postHeader">
+                        <div className="col-4"> {this.props.time} </div>
+                        <div className="col-4"> </div>
+                        <div className="col-4"> </div>
                     </div>
                 </div>
                 <div className="row replyCreate">
@@ -37,16 +38,14 @@ export default function Post(props) {
                     <div className="col-4">
                         <a> send </a>
                     </div>
+
+                    
+                    <form className="add-option" onSubmit={this.handleAddComment}>
+                        <input className="add-option__input" type="text" name="comment" />
+                        <button className="btn btn-primary">Send</button>
+                    </form>
+                    
                 </div>
-
-                {/*
-                <form className="add-option" onSubmit={handleAddComment}>
-                    <input className="add-option__input" type="text" name="comment" />
-                    <button className="btn btn-primary">Send</button>
-                </form>
-                */}
             </div>
-
-        </div >
     );
 }
