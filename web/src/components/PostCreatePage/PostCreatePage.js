@@ -1,6 +1,31 @@
 import React from 'react';
+import axios from 'axios';
+
 import PostCreateHeader from './PostCreateHeader';
 import ImageUpload from './ImageUpload';
+
+import pGetGeolocation from '../../utils/pGetGeolocation';
+
+const pFileDataReader = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsBinaryString(file);
+    });
+};
+
+const pFileUrlReader = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(file);
+    });
+};
+
 
 export default class PostCreatePage extends React.Component {
     constructor(props) {
@@ -16,51 +41,44 @@ export default class PostCreatePage extends React.Component {
         this.onImageUploadChange = this.onImageUploadChange.bind(this);
     }
 
+    pLoadImageData() {
+        return Promise.resolve()
+            .then(() => {
+                if (this.state.image) {
+                    return pFileDataReader(this.state.image);
+                } else {
+                    return null;
+                }
+            });
+    }
+
     onCreatePost() {
         console.log("PostCreatePage:onCreatePost");
 
         const textData = this.textareaEle.value.trim();
 
-        if (this.state.image) {
-            let reader = new FileReader();
-            reader.onload = () => {
-                const imageData = reader.result;
+        axios.all([this.pLoadImageData(), pGetGeolocation()])
+            .then(axios.spread((imageData, geolocation) => {
                 const data = {
                     text: textData,
-                    images: [imageData],
+                    images: imageData ? [imageData] : [],
+                    loc: [geolocation.lat, geolocation.lng],
                 };
                 console.log("PostCreatePage:onCreatePost: ", data);
                 // TODO, create post, jump back to main page
-            };
-            reader.readAsBinaryString(this.state.image);
-        } else {
-            const data = {
-                text: textData,
-                images: [],
-            };
-            console.log("PostCreatePage:onCreatePost: ", data);
-            // TODO, create post, jump back to main page
-        }
-
-
-        //const post = e.target.elements.content.value.trim();
-        // this.setState((prevState) => ({
-        //     comments: prevState.comments.concat(comment)
-        //   }));
-        //e.target.elements.content.value = '';
+            }));
     };
 
     onImageUploadChange(image) {
         console.log("PostCreatePage:onImageUploadChange - name: ", image.name);
 
-        let reader = new FileReader();
-        reader.onload = () => {
-            this.setState({
-                image: image,
-                imagePreviewUrl: reader.result,
+        pFileUrlReader(image)
+            .then((imagePreviewUrl) => {
+                this.setState({
+                    image: image,
+                    imagePreviewUrl: imagePreviewUrl,
+                });
             });
-        }
-        reader.readAsDataURL(image);
     }
 
     render() {
