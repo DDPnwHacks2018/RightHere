@@ -8,8 +8,7 @@ var socketC = require('socket.io-client')('http://localhost:3000');
 
 exports.getPosts = function(req, res) {
     // get user
-    var userName = "hls";
-    User.findOne({name: userName}, function(err, user) {
+    User.findOne({}, function(err, user) {
         // get all posts within the display distance
         Post.find({loc: {$near: user.loc, $maxDistance: 5}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
@@ -28,8 +27,7 @@ exports.getPosts = function(req, res) {
 
 exports.createPost = function(req, res) {
     // store the new post to db
-    var username = 'hls';
-    User.findOne({name: username}, function(err, user) {
+    User.findOne({}, function(err, user) {
         var post = req.body;
         post.author = user;
         // store and compute image hash
@@ -53,12 +51,11 @@ exports.createPost = function(req, res) {
 
 exports.replyPost = function(req, res) {
     // reply to Post
-    var username = "hls";
     var post_id = req.body.post_id;
     
-    User.findOne({name: username}, function(err, user) {
+    User.findOne({}, function(err, user) {
         if (err) return res.send(false);
-        Post.findById(req.body.post_id, function(err, post) {
+        Post.findById(post_id, function(err, post) {
             if (err) return res.send(false);
             var reply = {
                 text: req.body.text,
