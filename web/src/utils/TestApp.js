@@ -5,37 +5,63 @@ export default class TestApp extends React.Component {
   constructor(props){
     super(props);
 
-    this.onUpdate = this.onUpdate.bind(this);
-    this.createPost = this.createPost.bind(this);
-    this.onPostCreated = this.onPostCreated.bind(this);
+    this.onNewPost = this.onNewPost.bind(this);
+    this.onNewReply = this.onNewReply.bind(this);
 
-    serverAPI.registerUpdateListener(this.onUpdate);
+    this.createPost = this.createPost.bind(this);
+    this.replyPost = this.replyPost.bind(this);
+    this.getPosts = this.getPosts.bind(this);
+
+
+    serverAPI.onNewPost(this.onNewPost);
+    serverAPI.onNewReply(this.onNewReply);
   }
 
-  onUpdate(data) {
-    console.log("TestApp:onUpdate: ", data);
+  onNewPost(data) {
+    console.log("TestApp:onNewPost: ", data);
+  }
+
+  onNewReply(data) {
+    console.log("TestApp:onNewReply: ", data);
   }
 
   createPost() {
     console.log("TestApp:createPost");
 
-    const text = "some text";
-    const pic = "a pic";
-
-    serverAPI.postCreate(text, pic, this.onPostCreated);
+    const text = "a post";
+    serverAPI.createPost(text, (data) => {
+      console.log("post created: ", data)
+    });
   }
 
-  onPostCreated(data) {
-    console.log("TestApp:onPostCreated: ", data);
+  replyPost() {
+    console.log("TestApp:replyPost");
+
+    const post_id = "1";
+    const text = "a reply";
+    serverAPI.replyPost(post_id, text, (data) => {
+      console.log("post replied: ", data);
+    });
+  }
+
+  getPosts() {
+    console.log("TestApp:getPosts");
+
+    serverAPI.getPosts((data) => {
+      console.log("posts received: ", data);
+    });
   }
 
   render() {
     return (
       <div>
         <span> For Test </span>
-        <button onClick={serverAPI.triggerUpdate}> update </button>
-        <button onClick={this.createPost}> create </button>
+
+        <button onClick={this.createPost}> createPost </button>
+        <button onClick={this.replyPost}> replyPost </button>
+        <button onClick={this.getPosts}> getPosts </button>
       </div>
     );
   }
+
 }
