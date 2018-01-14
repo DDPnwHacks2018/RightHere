@@ -6,9 +6,7 @@ import './Post.css';
 import serverAPI from '../../utils/serverAPI';
 
 const humanize = (time) => {
-    console.log(time);
     time = Date.parse(time);
-    console.log(time);
 
     const minute = 60;
     const hour = minute * 60;
