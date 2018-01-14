@@ -2,7 +2,7 @@ import React from 'react';
 import serverAPI from './serverAPI';
 
 export default class TestApp extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.onNewPost = this.onNewPost.bind(this);
@@ -25,6 +25,14 @@ export default class TestApp extends React.Component {
     console.log("TestApp:onNewReply: ", data);
   }
 
+  getPosts() {
+    console.log("TestApp:getPosts");
+
+    serverAPI.getPosts((data) => {
+      console.log("posts received: ", data);
+    });
+  }
+
   createPost() {
     console.log("TestApp:createPost");
 
@@ -41,14 +49,6 @@ export default class TestApp extends React.Component {
     const text = "a reply";
     serverAPI.replyPost(post_id, text, (data) => {
       console.log("post replied: ", data);
-    });
-  }
-
-  getPosts() {
-    console.log("TestApp:getPosts");
-
-    serverAPI.getPosts((data) => {
-      console.log("posts received: ", data);
     });
   }
 
