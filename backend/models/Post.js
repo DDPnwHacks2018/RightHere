@@ -10,7 +10,7 @@ var postSchema = new Schema({
     replies: [{type: ObjectId, ref: 'Reply'}],
     images: [String],
     time: {type: Date, default: Date.now},
-    loc: {loc_name: String, x: Number, y:Number}
+    loc: {type: [Number], index: '2d'}
 });
 
 mongoose.model('Post', postSchema);

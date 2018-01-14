@@ -5,12 +5,13 @@ var User = mongoose.model('User');
 var Reply = mongoose.model('Reply');
 var socketC = require('socket.io-client')('http://localhost:3000');
 
+
 exports.getPosts = function(req, res) {
     // get user
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
         // get all posts within the display distance
-        Post.find({}, '_id time images text')
+        Post.find({loc: {$near: user.loc, $maxDistance: 5}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
             if (err) return res.send(false);
@@ -19,7 +20,6 @@ exports.getPosts = function(req, res) {
             posts.forEach(function(post) {
                 post.images = imProcessor.getImages(post.images);
             });
-            
             
             res.json(posts);
         });
