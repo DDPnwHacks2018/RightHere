@@ -13,9 +13,9 @@ export default class CreateHeader extends React.Component{
 
     render(){
         return(
-            <div className="container Header">
-                <a className="col-1 link-left btn btn-primary" href="/">Home</a>
-                <button className="col-1 link-right btn btn-primary">Post</button>
+            <div className="row justify-content-between Header">
+                <a className="col-2 btn btn-primary" href="/">Home</a>
+                <button className="col-2 btn btn-primary">Post</button>
             </div>
         );
     }

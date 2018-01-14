@@ -23,12 +23,9 @@ export default class PostCreatePage extends React.Component {
     render() {
         return (
             <div className="container">
-                <CreateHeader />
-                <form onSubmit={this.handleCreatePost} className="form-group">
-                    <input type="text" name="content" />
-                    <ImageUpload />
-                    <button className="btn btn-primary">Post</button>
-                </form>
+                <CreateHeader/>
+                <textarea rows="4" cols="60"></textarea>
+                <ImageUpload/>
             </div>
         );
     }
