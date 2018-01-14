@@ -15,7 +15,8 @@ exports.getPosts = function(req, res) {
         Post.find({loc: {$near: loc, $maxDistance: maxDist}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
-            if (err) return res.send(false);
+            //if (err) return res.send(false);
+            if (err) throw err;
             
             // retrive image
             posts.forEach(function(post) {
