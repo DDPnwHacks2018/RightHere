@@ -10,17 +10,17 @@ exports.getPosts = function(req, res) {
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
         // get all posts within the display distance
-        Post.find({}, '_id time text')
+        Post.find({}, '_id time images text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
             if (err) return res.send(false);
             
             // retrive image
-            /*
             posts.forEach(function(post) {
                 post.images = imProcessor.getImages(post.images);
             });
-            */
+            
+            
             res.json(posts);
         });
     });
