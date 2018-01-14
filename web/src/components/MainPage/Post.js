@@ -8,7 +8,7 @@ export default class Post extends React.Component {
         super(props);
     }
 
-    /*
+    
     handleAddComment = (e) => {
         e.preventDefault();
 
@@ -20,7 +20,6 @@ export default class Post extends React.Component {
 
         e.target.elements.comment.value = '';
     };
-    */
 
     render() {
         return (
@@ -45,12 +44,12 @@ export default class Post extends React.Component {
                         </div>
                     </div>
 
-                    {/*
+                    
                     <form className="add-option" onSubmit={this.handleAddComment}>
                         <input className="add-option__input" type="text" name="comment" />
                         <button className="btn btn-primary">Send</button>
                     </form>
-                    */}
+                    
                 </div>
 
             </div >
