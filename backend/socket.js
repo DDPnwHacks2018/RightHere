@@ -1,4 +1,6 @@
 var helper = require('./utils');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 module.exports = function(server) {
     var io = require('socket.io')(server);
@@ -32,12 +34,14 @@ module.exports = function(server) {
 
             data = JSON.parse(data);
 
-            var socketIdList = helper.getRelevantSocketId(data.loc);
-            for (var key in socketIdList) {
-                if (idToSocketObject.hasOwnProperty(key)) {
-                    idToSocketObject[key].emit("new_post", data);
+            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'socket_id', function (err, users){
+                if (err) throw err;
+                for (var key in users) {
+                    if (idToSocketObject.hasOwnProperty(key)) {
+                        idToSocketObject[key].emit("new_post", data);
+                    }
                 }
-            }
+            });
         });
 
         socket.on('do_update_reply', function(data) {
@@ -46,12 +50,14 @@ module.exports = function(server) {
 
             data = JSON.parse(data);
 
-            var socketIdList = helper.getRelevantSocketId(data.loc);
-            for (var key in socketIdList) {
-                if (idToSocketObject.hasOwnProperty(key)) {
-                    idToSocketObject[key].emit("new_reply", data.reply);
+            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'socket_id', function (err, users){
+                if (err) throw err;
+                for (var key in users) {
+                    if (idToSocketObject.hasOwnProperty(key)) {
+                        idToSocketObject[key].emit("new_post", data.reply);
+                    }
                 }
-            }
+            });
         });
 
         socket.on('disconnect', function(){

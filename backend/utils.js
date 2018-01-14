@@ -28,9 +28,9 @@ exports.updateUserLoc = function (socket_id, loc) {
 exports.getRelevantSocketId = function(inputLoc) {
     console.log("inputLoc" + inputLoc);
     inputLoc = [10, 15];
-    User.find({loc: {$near: inputLoc, $maxDistance: 5}}, 'socket_id', function (err){
+    User.find({loc: {$near: inputLoc, $maxDistance: 5}}, 'socket_id', function (err, users){
         if (err) throw err;
-        return uesrs;
+        return users;
     });
 };
 
