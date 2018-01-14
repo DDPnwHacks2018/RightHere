@@ -37,11 +37,11 @@ module.exports = function(server) {
             User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'loc socket_id', function (err, users){
                 if (err) throw err;
                 console.log(users);
-                for (var key in users) {
-                    if (idToSocketObject.hasOwnProperty(key.socked_id)) {
-                        idToSocketObject[key.socked_id].emit("new_post", data);
+                users.forEach(function(user){
+                    if (idToSocketObject.hasOwnProperty(user.socket_id)) {
+                        idToSocketObject[user.socket_id].emit("new_post", data);
                     }
-                }
+                });
             });
         });
 
@@ -50,14 +50,16 @@ module.exports = function(server) {
             console.log('Content:' + data);
 
             data = JSON.parse(data);
+            var testLoc = [10,15];
 
-            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'socket_id', function (err, users){
+            User.find({loc: {$near: testLoc, $maxDistance: 5}}, 'loc socket_id', function (err, users){
                 if (err) throw err;
-                for (var key in users) {
-                    if (idToSocketObject.hasOwnProperty(key)) {
-                        idToSocketObject[key].emit("new_post", data.reply);
+                console.log(users);
+                users.forEach(function(user){
+                    if (idToSocketObject.hasOwnProperty(user.socket_id)) {
+                        idToSocketObject[user.socket_id].emit("new_reply", data.reply);
                     }
-                }
+                });
             });
         });
 

@@ -23,17 +23,6 @@ exports.updateUserLoc = function (socket_id, loc) {
     });
 };
 
-// Given a loc, return relevant socket_id
-// [socket_id+]
-exports.getRelevantSocketId = function(inputLoc) {
-    console.log("inputLoc" + inputLoc);
-    inputLoc = [10, 15];
-    User.find({loc: {$near: inputLoc, $maxDistance: 5}}, 'socket_id', function (err, users){
-        if (err) throw err;
-        return users;
-    });
-};
-
 // Remove user from db by socket_id
 // No return
 exports.removeUserInfo = function (socket_id) {
