@@ -5,9 +5,9 @@
 
 let ip: String = "52.37.144.49"
 
-let apiGetPost: String = "http://\(ip):3000/posts"
-let apiCreatePost: String = "http://\(ip):3000/posts/create"
-let apiReplyPost: String = "http://\(ip):3000/posts/reply"
+let apiGetPost: String = "http://\(ip):3001/posts"
+let apiCreatePost: String = "http://\(ip):3001/posts/create"
+let apiReplyPost: String = "http://\(ip):3001/posts/reply"
 
 let notificationPostDidSet: String = "NotificationPostDidSet"
 let notificationSendComment: String = "NotificationSendComment"

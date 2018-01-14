@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
 
     let locationManager = CLLocationManager()
-    let socketManager = SocketManager(socketURL: URL(string: "http://\(ip):3000")!, config: [.log(true), .compress])
+    let socketManager = SocketManager(socketURL: URL(string: "http://\(ip):3001")!, config: [.log(true), .compress])
     var posts: [RHPost] = [] {
         didSet {
             NotificationCenter.default.post(name: .NotificationPostDidSet, object: nil)
