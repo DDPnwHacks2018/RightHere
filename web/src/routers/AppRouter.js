@@ -1,16 +1,16 @@
 import React from 'react';
-import RightHere from '../components/RightHere';
-import CreatePost from '../components/CreatePost';
-import Profile from '../components/Profile';
-import {BrowserRouter,Route,Switch,Link,NavLink} from 'react-router-dom';
+import MainPage from '../components/MainPage/MainPage';
+import PostCreatePage from '../components/PostCreatePage/PostCreatePage';
+import ProfilePage from '../components/ProfilePage/ProfilePage';
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 
-const AppRouter = ()=>(
+const AppRouter = () => (
     <BrowserRouter>
         <div>
             <Switch>
-                <Route path="/" component={RightHere} exact={true}/>
-                <Route path="/create" component={CreatePost} />
-                <Route path="/profile" component={Profile} />
+                <Route path="/" component={MainPage} exact={true} />
+                <Route path="/create" component={PostCreatePage} />
+                <Route path="/profile" component={ProfilePage} />
             </Switch>
         </div>
     </BrowserRouter>

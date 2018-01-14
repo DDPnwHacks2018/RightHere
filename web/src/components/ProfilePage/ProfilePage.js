@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileHeader from './ProfileHeader';
 
-export default class Profile extends React.Component{
+export default class ProfilePage extends React.Component{
     constructor(props){
         super(props);
     }
