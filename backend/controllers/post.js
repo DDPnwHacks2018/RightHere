@@ -10,9 +10,10 @@ exports.getPosts = function(req, res) {
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
         // get all posts within the display distance
-        Post.find()
-            .populate('replies')
+        Post.find({}, '_id time text')
+            .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
+            if (err) return res.send(false);
             res.json(posts);
         });
     });
@@ -26,7 +27,7 @@ exports.createPost = function(req, res) {
         var post = req.query;
         post.author = user;
         Post.create(post, function (err, new_post) {
-            if (err) throw err;
+            if (err) return res.send(false);
             console.log('saved');
 
             // add post to user's own post
@@ -47,22 +48,23 @@ exports.replyPost = function(req, res) {
     var post_id = req.query.post_id;
     
     User.findOne({name: username}, function(err, user) {
-        if (err) throw err;
+        if (err) return res.send(false);
         Post.findById(req.query.post_id, function(err, post) {
-            if (err) throw err;
+            if (err) return res.send(false);
             var reply = {
                 text: req.query.text,
                 author: user,
-                post: post
+                post_id: post
             };
             // insert to db
             Reply.create(reply, function(err, re) {
-                if (err) throw err;
+                if (err) return res.send(false);
                 post.update({ "$push": { "replies": re }}, function(err){
-                    if (err) throw err;
-
-                    socketC.emit("do_update_reply", JSON.stringify(re));
-                    res.send(true);
+                    if (err) res.send(false);
+                    else {
+                        socketC.emit("do_update_reply", JSON.stringify(re));
+                        res.send(true);
+                    }
                 });
             });
         });
