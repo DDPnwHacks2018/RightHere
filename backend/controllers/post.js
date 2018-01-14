@@ -33,6 +33,5 @@ exports.createPost = function(req, res) {
 
 exports.replyPost = function(req, res) {
     // reply to Post
-
     res.send('post created');
 };
