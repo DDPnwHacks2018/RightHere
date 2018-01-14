@@ -5,15 +5,22 @@ var User = mongoose.model('User');
 var Reply = mongoose.model('Reply');
 var socketC = require('socket.io-client')('http://localhost:3000');
 
+
 exports.getPosts = function(req, res) {
     // get user
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
         // get all posts within the display distance
-        Post.find({}, '_id time text')
+        Post.find({loc: {$near: user.loc, $maxDistance: 5}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
             if (err) return res.send(false);
+            
+            // retrive image
+            posts.forEach(function(post) {
+                post.images = imProcessor.getImages(post.images);
+            });
+            
             res.json(posts);
         });
     });
@@ -64,11 +71,10 @@ exports.replyPost = function(req, res) {
             Reply.create(reply, function(err, re) {
                 if (err) return res.send(false);
                 post.update({ "$push": { "replies": re }}, function(err){
-                    if (err) res.send(false);
-                    else {
-                        socketC.emit("do_update_reply", JSON.stringify(re));
-                        res.send(true);
-                    }
+                    if (err) return res.send(false);
+
+                    socketC.emit("do_update_reply", JSON.stringify(re));
+                    res.send(true);
                 });
             });
         });
