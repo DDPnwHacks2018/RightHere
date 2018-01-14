@@ -24,7 +24,18 @@
       
       $('#start_getting_posts').on('click', function(){
         socket.emit('hello');
+        var testData = {
+            loc: [10,15]
+        };
+        socket.emit('start_getting_updates', testData);
         return false;
+      });
+
+      $('#update_loc').on('click', function () {
+          var testData = {
+              loc: [20,25]
+          };
+          socket.emit('update_user_loc', testData);
       });
 
       socket.on('hello', function(data){
@@ -44,6 +55,7 @@
     <ul id="messages"></ul>
     <form>
       <button id="start_getting_posts">create_user</button>
+      <button id="update_loc">update_loc</button>
     </form>
   </body>
 </html>
