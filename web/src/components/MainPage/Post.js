@@ -28,8 +28,8 @@ export default class Post extends React.Component {
                 <div className="row post">
                     <div className="col">
                         <div className="row postHeader">
-                            <div className="col-4"> {this.props.time} </div>
-                            <div className="col-4"> {this.props.location}</div>
+                            <div className="col-4"><i class="fa fa-clock-o" aria-hidden="true"></i> {this.props.time} </div>
+                            <div className="col-4"> <i class="fa fa-map-marker" aria-hidden="true"></i> {this.props.location}</div>
                             <div className="col-4"> </div>
                         </div>
                         <div className="row postContent">
@@ -45,7 +45,7 @@ export default class Post extends React.Component {
                         <textarea placeholder="Add Your Comment"></textarea>
                     </div>
                     <div className="col-2 sendBtn">
-                        <button className="btn btn-primary" onClick={this.handleAddComment}>Send</button>
+                        <button className="btn btn-primary" onClick={this.handleAddComment}><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                     </div>
                     
                 </div>
