@@ -5,31 +5,36 @@ var User = mongoose.model('User');
 var Reply = mongoose.model('Reply');
 var socketC = require('socket.io-client')('http://localhost:3000');
 
+var maxDist = 0.05/111.12;
 
 exports.getPosts = function(req, res) {
     // get user
-    User.findOne({}, function(err, user) {
+    //User.findOne({}, function(err, user) {
         // get all posts within the display distance
-        Post.find({loc: {$near: user.loc, $maxDistance: 5}}, '_id time images loc text')
+        var loc = req.body.loc;
+        Post.find({loc: {$near: loc, $maxDistance: maxDist}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
-            if (err) return res.send(false);
+            //if (err) return res.send(false);
+            if (err) throw err;
             
             // retrive image
             posts.forEach(function(post) {
                 post.images = imProcessor.getImages(post.images);
             });
             
-            res.json(posts);
+            res.json({
+                posts: posts
+            });
         });
-    });
+    //});
 };
 
 exports.createPost = function(req, res) {
     // store the new post to db
-    User.findOne({}, function(err, user) {
+    //User.findOne({}, function(err, user) {
         var post = req.body;
-        post.author = user;
+        //post.author = user;
         // store and compute image hash
         if (post.images) {
             post.images = imProcessor.uploadImages(post.images);
@@ -45,7 +50,7 @@ exports.createPost = function(req, res) {
 
             res.send(true);
         });
-    });
+    //});
 };
 
 
@@ -53,13 +58,14 @@ exports.replyPost = function(req, res) {
     // reply to Post
     var post_id = req.body.post_id;
     
-    User.findOne({}, function(err, user) {
-        if (err) return res.send(false);
+    //User.findOne({}, function(err, user) {
+        //if (err) return res.send(false);
         Post.findById(post_id, function(err, post) {
             if (err) return res.send(false);
+            if (!post) return res.send(false);
             var reply = {
                 text: req.body.text,
-                author: user,
+                //author: user,
                 post_id: post
             };
             // insert to db
@@ -77,6 +83,6 @@ exports.replyPost = function(req, res) {
                 });
             });
         });
-    });
+    //});
 };
 
