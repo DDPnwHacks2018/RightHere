@@ -80,6 +80,27 @@ export default class Post extends React.Component {
         );
 
         return (
+<<<<<<< HEAD
+            <div>
+                <div className="row post">
+                    <div className="col">
+                        <div className="row postHeader">
+                            <div className="col-4"><i class="fa fa-clock-o" aria-hidden="true"></i> {this.props.time} </div>
+                            <div className="col-4"> <i class="fa fa-map-marker" aria-hidden="true"></i> {this.props.location}</div>
+                            <div className="col-4"> </div>
+                        </div>
+                        <div className="row postContent">
+                            <div className="col-12">{this.props.text}</div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div className="row replyCreate">
+                    <div className="col-10 reply">{this.props.comments} </div>
+                    <hr/>
+                    <div className="col-10">
+                        <textarea placeholder="Add Your Comment"></textarea>
+=======
             <div className="row post">
                 <div className="col">
                     <div className="row postHeader">
@@ -88,6 +109,7 @@ export default class Post extends React.Component {
                     </div>
                     <div className="row postContent">
                         <div className="col">{this.props.text}</div>
+>>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
                     </div>
                     {
                         this.props.images && this.props.images.length > 0 && (
@@ -113,7 +135,11 @@ export default class Post extends React.Component {
                             <button className="btn btn-primary" onClick={this.onReplyPost}> Send </button>
                         </div>
                     </div>
+<<<<<<< HEAD
+                  
+=======
                     <Line />
+>>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
                 </div>
             </div>
         );

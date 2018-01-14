@@ -14,7 +14,7 @@ export default class ProfilePage extends React.Component {
                     <div className="col">
                         <h2>My Profile</h2>
                         <div className="picture">
-                            <p>Picture</p>
+                            <img src="head.png" alt="Smiley face"></img>
                         </div>
                         <div className="row name-change">
                             <p className="col-1">Name: </p>

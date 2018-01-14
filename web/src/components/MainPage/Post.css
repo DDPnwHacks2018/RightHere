@@ -1,4 +1,3 @@
-
 textarea {
     width: 100%;
 }
@@ -6,4 +5,29 @@ textarea {
 .post .postText {
     border-bottom-width: 2px;
     border-bottom-style: solid;
+}
+
+.post .postContent{
+    margin-left: 3px;
+    background-color: rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.replyCreate{
+    margin-bottom: 10px;
+}
+
+.reply{
+    border: 0px;
+    margin-left: 15px;
+    padding-top: 5px;
+    margin: 0px;
+}
+
+hr{
+    width: 95%;
+    margin-top: 0px;
+    margin-bottom: 5px;
+	border-top: 1px solid #F8F8F8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
 }
