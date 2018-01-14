@@ -10,7 +10,9 @@ exports.getPosts = function(req, res) {
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
         // get all posts within the display distance
-        Post.find(function(err, posts) {
+        Post.find()
+            .populate('replies')
+            .exec(function(err, posts) {
             res.json(posts);
         });
     });
@@ -66,7 +68,4 @@ exports.replyPost = function(req, res) {
         });
     });
 };
-function newFunction() {
-    var imProcessor = require('./image');
-}
 
