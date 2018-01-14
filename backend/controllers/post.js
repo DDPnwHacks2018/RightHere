@@ -44,31 +44,22 @@ exports.replyPost = function(req, res) {
     var username = "hls";
     var post_id = req.query.post_id;
     
-    User.find({name: username}, function(err, user) {
+    User.findOne({name: username}, function(err, user) {
         if (err) throw err;
-        Post.find({_id: req.query.post_id}, function(err, post) {
+        Post.findById(req.query.post_id, function(err, post) {
             if (err) throw err;
             var reply = {
                 text: req.query.text,
                 author: user,
                 post: post
             };
-
-            console.log(reply);
             // insert to db
             Reply.create(reply, function(err, re) {
                 if (err) throw err;
-                
-                // add to post replies
-                if (post.replies == null)
-                    post.replies = [re];
-                else
-                    post.replies.push(re);
-
-                // save post
-                post.save.then(function(err, updatedPost) {
+                post.update({ "$push": { "replies": re }}, function(err){
                     if (err) throw err;
 
+                    socketC.emit("do_update_reply", JSON.stringify(re));
                     res.send(true);
                 });
             });
