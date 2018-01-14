@@ -3,13 +3,18 @@ var Post = mongoose.model('Post');
 
 exports.getPosts = function(req, res) {
     // get all posts within the disply distance
+
     res.send({allposts: 'allposts'});
 }
 
 exports.createPost = function(req, res) {
     // store the new post to db
 
-    console.log(req.query);
+    var post = new Post(req.query);
+    console.log(post);
+    post.save().then(function(err) {
+        if (err) throw err;
+    });
     res.send(req.query);
 }
 

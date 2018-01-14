@@ -12,5 +12,5 @@ var postSchema = new Schema({
     loc: {loc_name: String, x: Number, y:Number}
 });
 
-
+console.log('shit');
 mongoose.model('Post', postSchema);

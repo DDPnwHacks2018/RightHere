@@ -6,6 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+// connect to database
+mongoose.connect('mongodb://localhost:mydb', {useMongoClient: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log(' were connected!');
+});
+require('./models/User');
+require('./models/Post');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var posts = require('./routes/post');
@@ -24,10 +34,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// connect to database
-mongoose.connect('mongodb://localhost:mydb', {useMongoClient: true});
-require('./models/Post');
 
 // routes
 app.use('/', index);
