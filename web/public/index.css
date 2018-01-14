@@ -23,16 +23,18 @@
    text-align: center;
 }
 
-.profileHeader{
+.Header{
     background-color:#4682B4;
 }
 
-.profileHeader button{
+.Header button,
+.Header a{
     background-color:#4682B4;
     border-color: #4682B4;
 }
 
-.profileHeader button:hover{
+.Header button:hover,
+.Header a:hover{
     background-color: #4682B4;
     border-color: #4682B4;
 }
@@ -56,6 +58,18 @@
 
 .name-change button{
     width: 60px;
+}
+
+.container textarea{
+    margin: auto;
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+ImageUpload{
+    margin: auto;
+    margin-top: 30px;
+    margin-left: 60px;
 }
 
 @media (min-width: 576px) {

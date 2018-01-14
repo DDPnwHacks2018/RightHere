@@ -1,20 +1,23 @@
 import React from 'react';
 
-const CreateHeader = (props) => (
-    <div>
+export default class CreateHeader extends React.Component{
+    constructor(props){
+        super(props);
+        this.handlePost=this.handlePost.bind(this);
+    }
 
-        <ul className="nav nav-tabs">
-            <li className="nav-item">
-                <a className="nav-link" href="/">Back</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="/">
-                    <button className="btn btn-primary">Post</button>
-                </a>
-            </li>
-        </ul>
+    handlePost = (e) => {
+        e.preventDefault();
+        console.log("press");
+    };
 
-    </div>
-);
-  
-export default CreateHeader;
+    render(){
+        return(
+            <div className="container Header">
+                <a className="col-1 link-left btn btn-primary" href="/">Home</a>
+                <button className="col-1 link-right btn btn-primary">Post</button>
+            </div>
+        );
+    }
+    
+}
