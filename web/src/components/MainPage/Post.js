@@ -6,6 +6,8 @@ import './Post.css';
 export default class Post extends React.Component {
     constructor(props) {
         super(props);
+
+        console.log("props: ", props);
     }
 
     /*
@@ -34,7 +36,8 @@ export default class Post extends React.Component {
             <div className="row post">
                 <div className="col">
                     <div className="row postHeader">
-                        <div className="col-12"> {this.props.time} </div>
+                        <div className="col-8"> <i class="fa fa-clock-o" aria-hidden="true"></i> {this.props.time} </div>
+                        <div className="col-4"> <i class="fa fa-map-marker" aria-hidden="true"></i> UBC </div>
                     </div>
                     <div className="row postContent">
                         <div className="col">{this.props.text}</div>

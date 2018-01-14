@@ -7,7 +7,7 @@ export default function ImageUpload(props) {
 
       {props.previewUrl
         ? <div> <img src={props.previewUrl} alt="preview img" /> </div>
-        : <div> Please select an Image for Preview </div>
+        : <div > <i class="fa fa-cloud-upload" aria-hidden="true"></i> Please select an Image for Preview </div>
       }
     </div>
   );

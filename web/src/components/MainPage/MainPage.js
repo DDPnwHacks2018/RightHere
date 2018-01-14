@@ -9,8 +9,28 @@ export default class MainPage extends React.Component {
 
         this.posts = props.posts;
         this.replies = props.replies;
+
+        console.log("posts: ", this.posts);
+        console.log("replies: ", this.replies);
     }
 
+
+
+    handleTest = (e) => {
+
+        this.setState((prevState) => ({
+            time: prevState.time.concat('4h ago')
+        }));
+        this.setState((prevState) => ({
+            text: prevState.text.concat('4h ago')
+        }));
+        this.setState((prevState) => ({
+            comments: prevState.comments.concat('4h ago')
+        }));
+        this.setState((prevState) => ({
+            location: prevState.location.concat('4h ago')
+        }));
+    }
     render() {
         return (
             <div className="container">
