@@ -6,6 +6,9 @@ import Post from './Post';
 export default class MainPage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.posts = props.posts;
+        this.replies = props.replies;
     }
 
     render() {
@@ -13,18 +16,18 @@ export default class MainPage extends React.Component {
             <div className="container">
                 <MainHeader />
 
-                <div className="row">
-                    <div className="col">
-                        <Post time={'2h ago'} text={'cold evening'} comments={'Good pics'} location={'Vancouver'}/>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col">
-                        <Post time={'3h ago'} text={'running outside'} comments={'bad pics'} location={'New York'}/>
-                    </div>
-                </div>
-
+                {
+                    this.posts.map((post) => {
+                        const replies = this.replies[post.id];
+                        return (
+                            <div className="row" key={post.id}>
+                                <div className="col">
+                                    <Post time={post.time} text={post.text} images={post.images} replies={replies} />
+                                </div>
+                            </div>
+                        );
+                    })
+                }
 
             </div>
         );

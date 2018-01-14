@@ -8,6 +8,13 @@
     margin-right: 10px;
 }
 
+.container .row .col {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .picture{
     height: 200px;
     width: 200px;
@@ -76,23 +83,40 @@ img{
     width: 200px;
 }
 
-.postContent{
+.post > .col {
+    margin-bottom: 10px;
+}
+
+.post .line {
+    height: 5px;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+}
+
+.postContent .col {
     display: flex;
     justify-content: left;
-    height: 70px;
+    /*height: 70px;*/
+    /*border-bottom-style: dashed;*/
+    /*border-bottom-width: 1px;*/
 }
 
 .postHeader{
     border-top: 1px solid rgba(0,0,0,0.2);
 }
 
+.replyCreate {
+    padding: 2.5px;
+}
+
 .replyCreate textarea{
-    height: 30px;
+    height: 25px;
+    margin-top: 0px;
 }
 .replyCreate button{
     position: relative;
-    height: 30px;
-    bottom: -30px;
+    height: 25px;
+    /*bottom: -30px;*/
     text-align: center;
     border: 0px;
     margin: 0px;
