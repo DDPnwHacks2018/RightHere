@@ -15,14 +15,6 @@ module.exports = function(server) {
             console.log('Hello received from client.');
         });
 
-        socket.on('start_getting_updates', function(data){
-            // Take down socket object to socket io
-            idToSocketObject[socket.id] = socket;
-
-            // Save use data to db
-            helper.createUserInfo(socket.id, data.loc);
-        });
-
         socket.on('update_user_loc', function(data){
             if (socket.started === false) {
                 // Take down socket object to socket io
