@@ -15,14 +15,23 @@ exports.createUserInfo = function (socket_id, loc) {
     });
 };
 
+// Given a loc and a socket_id, update the loc to the db
+// No return
+exports.updateUserLoc = function (socket_id, loc) {
+    User.update({socket_id: socket_id}, {$set: {loc: loc}}, function(err){
+        if (err) throw err;
+    });
+};
+
 // Given a loc, return relevant socket_id
 // [socket_id+]
-exports.getRelevantSocketId = function(loc) {
-    User.find({loc: {$near: loc, $maxDistance: 5}}, 'socket_id')
-        .exec(function (err) {
-            if (err) throw err;
-            return users;
-        })
+exports.getRelevantSocketId = function(inputLoc) {
+    console.log("inputLoc" + inputLoc);
+    inputLoc = [10, 15];
+    User.find({loc: {$near: inputLoc, $maxDistance: 5}}, 'socket_id', function (err){
+        if (err) throw err;
+        return uesrs;
+    });
 };
 
 // Remove user from db by socket_id

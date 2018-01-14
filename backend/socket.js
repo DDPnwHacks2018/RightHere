@@ -1,4 +1,4 @@
-var helper = require('utils');
+var helper = require('./utils');
 
 module.exports = function(server) {
     var io = require('socket.io')(server);
@@ -13,19 +13,24 @@ module.exports = function(server) {
             console.log('Hello received from client.');
         });
 
-        socket.on('start getting updates', function(data){
+        socket.on('start_getting_updates', function(data){
             // Take down socket object to socket io
             idToSocketObject[socket.id] = socket;
 
             // Save use data to db
             helper.createUserInfo(socket.id, data.loc);
+        });
 
-            console.log('To be implemented.');
+        socket.on('update_user_loc', function(data){
+            // Update user data to db
+            helper.updateUserLoc(socket.id, data.loc);
         });
 
         socket.on('do_update_post', function(data){
             console.log('Post changes detected, push to clients.');
             console.log('Content:' + data);
+
+            data = JSON.parse(data);
 
             var socketIdList = helper.getRelevantSocketId(data.loc);
             for (var key in socketIdList) {
@@ -38,6 +43,8 @@ module.exports = function(server) {
         socket.on('do_update_reply', function(data) {
             console.log('Reply changes detected, push to clients.');
             console.log('Content:' + data);
+
+            data = JSON.parse(data);
 
             var socketIdList = helper.getRelevantSocketId(data.loc);
             for (var key in socketIdList) {
