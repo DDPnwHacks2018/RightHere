@@ -82,7 +82,6 @@ export default class Post extends React.Component {
         );
 
         return (
-<<<<<<< HEAD
             <div>
                 <div className="row post">
                     <div className="col">
@@ -102,16 +101,6 @@ export default class Post extends React.Component {
                     <hr/>
                     <div className="col-10">
                         <textarea placeholder="Add Your Comment"></textarea>
-=======
-            <div className="row post">
-                <div className="col">
-                    <div className="row postHeader">
-                        <div className="col-8"> <i className="fa fa-clock-o" aria-hidden="true"></i> {humanize(this.props.time)} </div>
-                        <div className="col-4"> <i className="fa fa-map-marker" aria-hidden="true"></i> UBC </div>
-                    </div>
-                    <div className="row postContent">
-                        <div className="col">{this.props.text}</div>
->>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
                     </div>
                     {
                         this.props.images && this.props.images.length > 0 && (
@@ -124,7 +113,7 @@ export default class Post extends React.Component {
                     }
                     {
                         this.props.replies && this.props.replies.map((reply) => (
-                            < div className="row postReplies" key={reply._id} >
+                            <div className="row postReplies" key={reply._id} >
                                 <div className="col">{reply.text}</div>
                             </div>
                         ))
@@ -137,11 +126,7 @@ export default class Post extends React.Component {
                             <button className="btn btn-primary" onClick={this.onReplyPost}> Send </button>
                         </div>
                     </div>
-<<<<<<< HEAD
-                  
-=======
                     <Line />
->>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
                 </div>
             </div>
         );
