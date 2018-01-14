@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ne1-cF-N0D">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Collection View Controller-->
+        <scene sceneID="3iQ-sA-KfP">
+            <objects>
+                <collectionViewController id="jkl-Ln-gsu" customClass="RHCollectionViewController" customModule="RightHere" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="IKs-5j-sCF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EmW-Kl-hqN">
+                            <size key="itemSize" width="375" height="400"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="G6A-by-KC6" customClass="RHCollectionViewCell" customModule="RightHere" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="nrl-9p-Nfd">
+                                            <rect key="frame" x="0.0" y="20" width="375" height="360"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odo-7v-B5V">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="113"/>
+                                                    <string key="text">Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here Text Here </string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aCz-nP-n2M">
+                                                    <rect key="frame" x="16" y="119" width="343" height="188.5"/>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A1Q-A3-hKS">
+                                                    <rect key="frame" x="16" y="313.5" width="343" height="46.5"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DoP-6U-mDF">
+                                                            <rect key="frame" x="0.0" y="8.5" width="278" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO6-gn-J6V" customClass="MDCButton">
+                                                            <rect key="frame" x="288" y="8.5" width="55" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <state key="normal" title="   Post   "/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="odo-7v-B5V" firstAttribute="leading" secondItem="ZLD-vc-z2Q" secondAttribute="leading" constant="16" id="K6N-uU-8lb"/>
+                                                <constraint firstItem="A1Q-A3-hKS" firstAttribute="leading" secondItem="ZLD-vc-z2Q" secondAttribute="leading" constant="16" id="Lwv-jO-qnh"/>
+                                                <constraint firstItem="ZLD-vc-z2Q" firstAttribute="trailing" secondItem="odo-7v-B5V" secondAttribute="trailing" constant="16" id="MuK-fn-z3r"/>
+                                                <constraint firstItem="ZLD-vc-z2Q" firstAttribute="trailing" secondItem="A1Q-A3-hKS" secondAttribute="trailing" constant="16" id="jRj-AV-Mcr"/>
+                                                <constraint firstItem="aCz-nP-n2M" firstAttribute="leading" secondItem="ZLD-vc-z2Q" secondAttribute="leading" constant="16" id="qik-nV-lll"/>
+                                                <constraint firstItem="ZLD-vc-z2Q" firstAttribute="trailing" secondItem="aCz-nP-n2M" secondAttribute="trailing" constant="16" id="wOQ-t9-Y7M"/>
+                                            </constraints>
+                                            <viewLayoutGuide key="safeArea" id="ZLD-vc-z2Q"/>
+                                        </stackView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="nrl-9p-Nfd" firstAttribute="top" secondItem="bwj-Be-cch" secondAttribute="top" constant="20" id="Qdc-Rh-nct"/>
+                                    <constraint firstItem="nrl-9p-Nfd" firstAttribute="trailing" secondItem="bwj-Be-cch" secondAttribute="trailing" id="aRN-jm-39O"/>
+                                    <constraint firstItem="nrl-9p-Nfd" firstAttribute="leading" secondItem="bwj-Be-cch" secondAttribute="leading" id="qiC-uW-PFG"/>
+                                    <constraint firstItem="bwj-Be-cch" firstAttribute="bottom" secondItem="nrl-9p-Nfd" secondAttribute="bottom" constant="20" id="vIz-o9-4lt"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="bwj-Be-cch"/>
+                                <connections>
+                                    <outlet property="commentSendButton" destination="yO6-gn-J6V" id="hkV-Ui-czC"/>
+                                    <outlet property="commentTextField" destination="DoP-6U-mDF" id="pSl-1g-ica"/>
+                                    <outlet property="postImageView" destination="aCz-nP-n2M" id="h2K-Tl-ucO"/>
+                                    <outlet property="postText" destination="odo-7v-B5V" id="qJE-r8-O4b"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="jkl-Ln-gsu" id="EIl-0j-jjx"/>
+                            <outlet property="delegate" destination="jkl-Ln-gsu" id="Mm5-v2-7OJ"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="dNd-d0-SvG"/>
+                    <connections>
+                        <segue destination="knP-G1-BXI" kind="show" identifier="AddPost" id="j77-pL-vcE"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3sa-4D-xkY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909.60000000000002" y="106.59670164917542"/>
+        </scene>
+        <!--Add Post View Controller-->
+        <scene sceneID="GbC-8L-IfX">
+            <objects>
+                <viewController id="knP-G1-BXI" customClass="RHAddPostViewController" customModule="RightHere" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oof-Hs-6Hq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DIW-JB-gV8">
+                                <rect key="frame" x="16" y="80" width="343" height="225"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-wm-CBH">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n2c-Dy-43j">
+                                        <rect key="frame" x="0.0" y="40" width="343" height="185"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="225" id="um5-vm-eFK"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="i3R-RY-E7j" firstAttribute="trailing" secondItem="DIW-JB-gV8" secondAttribute="trailing" constant="16" id="QIs-1q-A3k"/>
+                            <constraint firstItem="DIW-JB-gV8" firstAttribute="top" secondItem="i3R-RY-E7j" secondAttribute="top" constant="16" id="e6l-Ys-SSS"/>
+                            <constraint firstItem="DIW-JB-gV8" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="gzk-br-98t"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="i3R-RY-E7j"/>
+                    </view>
+                    <connections>
+                        <outlet property="newPostImageView" destination="n2c-Dy-43j" id="fBe-ix-Zc2"/>
+                        <outlet property="newPostText" destination="kBk-wm-CBH" id="L8N-V0-fMc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bMh-yb-NIL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1608.8" y="106.59670164917542"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OuH-M6-A1T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ne1-cF-N0D" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rtz-nu-sx4">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jkl-Ln-gsu" kind="relationship" relationship="rootViewController" id="8a8-zn-j98"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kVn-nm-xLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="210" y="107"/>
+        </scene>
+    </scenes>
+</document>

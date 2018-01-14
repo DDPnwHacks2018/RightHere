@@ -1,0 +1,31 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.2'
+
+target 'RightHere' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # MaterialComponents
+  pod 'MaterialComponents/AppBar'
+  pod 'MaterialComponents/Buttons'
+  pod 'MaterialComponents/Collections'
+
+  # Socket.io
+  pod 'Socket.IO-Client-Swift', '~> 13.1.0'
+
+  # Networking library
+  pod 'Alamofire', '~> 4.5'
+
+  # Pods for RightHere
+
+  target 'RightHereTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'RightHereUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
