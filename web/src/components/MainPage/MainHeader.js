@@ -14,18 +14,10 @@ export default class MainHeader extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <ul className="nav nav-pills nav-justified">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">RightHere</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link">Top</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/profile" onClick={this.handleSave}>Post</a>
-                    </li>
-                </ul>
+            <div className="row justify-content-between Header">
+                <a className="col-2 btn btn-primary" href="/profile">Profile</a>
+                <button className="col-2 btn btn-primary">Top</button>
+                <a className="col-2 btn btn-primary" href="/create">Post</a>
             </div>
         );
     }
