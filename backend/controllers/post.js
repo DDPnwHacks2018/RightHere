@@ -28,11 +28,8 @@ exports.createPost = function(req, res) {
             // add post to user's own post
             // might be implemented??
 
-            // send update 
-            Post.find(function(err, posts) {
-                if (err) return err;
-                socketC.emit("do update", posts);
-            });
+            // send update to socket
+            socketC.emit("do_update_post", JSON.stringify(new_post));
 
             res.send(true);
         });

@@ -6,7 +6,7 @@ module.exports = function(server) {
         socket.user_id = 0;
 
         socket.on('hello', function(){
-            socket.emit('Hello', "hello from backend");
+            socket.emit('hello', "hello from backend");
             console.log('Hello received from client.');
         });
 
@@ -14,10 +14,18 @@ module.exports = function(server) {
             console.log('To be implemented.');
         });
 
-        socket.on('do update', function(data){
-            io.emit('update', data);
-            console.log('Changes detected, push to clients.');
+        socket.on('do_update_post', function(data){
+            console.log('Post changes detected, push to clients.');
             console.log('Content:' + data);
+
+            io.emit('new_post', data);
+        });
+
+        socket.on('do_update_reply', function(data) {
+            console.log('Reply changes detected, push to clients.');
+            console.log('Content:' + data);
+
+            io.emit('new_reply', data);
         });
 
         socket.on('disconnect', function(){
