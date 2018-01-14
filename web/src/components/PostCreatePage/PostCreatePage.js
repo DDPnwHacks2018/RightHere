@@ -1,31 +1,109 @@
 import React from 'react';
-import CreateHeader from './CreateHeader';
+import axios from 'axios';
+
+import PostCreateHeader from './PostCreateHeader';
 import ImageUpload from './ImageUpload';
+
+import pGetGeolocation from '../../utils/pGetGeolocation';
+
+const pFileDataReader = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsBinaryString(file);
+    });
+};
+
+const pFileUrlReader = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(file);
+    });
+};
+
 
 export default class PostCreatePage extends React.Component {
     constructor(props) {
         super(props);
-        this.handleCreatePost = this.handleCreatePost.bind(this);
+
+        this.state = {
+            image: null,
+            imageDataUrl: null,
+        };
+        this.textareaEle = null;
+
+        this.onCreatePost = this.onCreatePost.bind(this);
+        this.onImageUploadChange = this.onImageUploadChange.bind(this);
     }
 
-    handleCreatePost = (e) => {
-        e.preventDefault();
+    pLoadImageData() {
+        return Promise.resolve()
+            .then(() => {
+                if (this.state.image) {
+                    return pFileDataReader(this.state.image);
+                } else {
+                    return null;
+                }
+            });
+    }
 
-        const post = e.target.elements.content.value.trim();
-        console.log({ post });
-        // this.setState((prevState) => ({
-        //     comments: prevState.comments.concat(comment)
-        //   }));
+    onCreatePost() {
+        console.log("PostCreatePage:onCreatePost");
 
-        e.target.elements.content.value = '';
+        const textData = this.textareaEle.value.trim();
+
+        pGetGeolocation()
+            .then((geolocation) => {
+                const data = {
+                    text: textData,
+                    images: this.state.imageDataUrl ? [this.state.imageDataUrl] : [],
+                    loc: [geolocation.lat, geolocation.lng],
+                };
+                console.log("PostCreatePage:onCreatePost: ", data);
+                // TODO, create post, jump back to main page
+            })
+            .then(() => {
+                this.props.history.push('/');
+            });
+        /*
+        axios.all([this.pLoadImageData(), pGetGeolocation()])
+            .then(axios.spread((imageData, geolocation) => {
+                const data = {
+                    text: textData,
+                    images: imageData ? [imageData] : [],
+                    loc: [geolocation.lat, geolocation.lng],
+                };
+                console.log("PostCreatePage:onCreatePost: ", data);
+                // TODO, create post, jump back to main page
+            }));
+        */
     };
+
+    onImageUploadChange(image) {
+        console.log("PostCreatePage:onImageUploadChange - name: ", image.name);
+
+        pFileUrlReader(image)
+            .then((imageDataUrl) => {
+                this.setState({
+                    image: image,
+                    imageDataUrl: imageDataUrl,
+                });
+            });
+    }
 
     render() {
         return (
             <div className="container">
-                <CreateHeader/>
-                <textarea rows="4" cols="60"></textarea>
-                <ImageUpload/>
+                <PostCreateHeader onCreatePost={this.onCreatePost} />
+                <textarea rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
+                <ImageUpload
+                    previewUrl={this.state.imageDataUrl}
+                    onChange={this.onImageUploadChange} />
             </div>
         );
     }
