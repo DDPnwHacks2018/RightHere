@@ -1,16 +1,16 @@
 import React from 'react';
 import RightHere from '../components/RightHere';
-import Header from '../components/Header';
 import CreatePost from '../components/CreatePost';
+import Profile from '../components/Profile';
 import {BrowserRouter,Route,Switch,Link,NavLink} from 'react-router-dom';
 
 const AppRouter = ()=>(
     <BrowserRouter>
         <div>
-            <Header/>
             <Switch>
-                <Route path="/" component={CreatePost} exact={true}/>
+                <Route path="/" component={RightHere} exact={true}/>
                 <Route path="/create" component={CreatePost} />
+                <Route path="/profile" component={Profile} />
             </Switch>
         </div>
     </BrowserRouter>
