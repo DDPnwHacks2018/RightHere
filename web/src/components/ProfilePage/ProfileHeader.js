@@ -13,8 +13,8 @@ export default class ProfileHeader extends React.Component {
 
     render() {
         return (
-            <div className="row justify-content-between profileHeader">
-                <button className="col-2 btn btn-primary">Home</button>
+            <div className="row justify-content-between Header">
+                <a className="col-2 btn btn-primary" href="/">Home</a>
                 <button className="col-2 btn btn-primary">Save</button>
             </div>
         );
