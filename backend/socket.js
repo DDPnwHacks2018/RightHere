@@ -10,11 +10,11 @@ module.exports = function(server) {
             console.log('Hello received from client.');
         });
 
-        socket.on('start getting posts', function(){
+        socket.on('start getting updates', function(){
             console.log('To be implemented.');
         });
 
-        socket.on('gather information', function(data){
+        socket.on('do update', function(data){
             io.emit('update', data);
             console.log('Changes detected, push to clients.');
             console.log('Content:' + data);
