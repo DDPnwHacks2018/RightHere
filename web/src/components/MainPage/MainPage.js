@@ -4,11 +4,10 @@ import Post from './Post';
 
 
 export default class MainPage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-
     }
-    
+
     render() {
         return (
             <div className="container">
