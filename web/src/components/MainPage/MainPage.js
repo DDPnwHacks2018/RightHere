@@ -15,13 +15,13 @@ export default class MainPage extends React.Component {
 
                 <div className="row">
                     <div className="col">
-                        <Post time={'2h ago'} text={'cold evening'} comments={'Good pics'}/>
+                        <Post time={'2h ago'} text={'cold evening'} comments={'Good pics'} location={'Vancouver'}/>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col">
-                        <Post time={'3h ago'} text={'running outside'} comments={'bad pics'}/>
+                        <Post time={'3h ago'} text={'running outside'} comments={'bad pics'} location={'New York'}/>
                     </div>
                 </div>
 
