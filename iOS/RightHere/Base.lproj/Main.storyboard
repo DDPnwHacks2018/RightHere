@@ -125,11 +125,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DIW-JB-gV8">
-                                <rect key="frame" x="16" y="104" width="343" height="658"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DIW-JB-gV8">
+                                <rect key="frame" x="16" y="128.00000000000003" width="343" height="386.66666666666674"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PTi-aU-oLo" customClass="MDCTextField">
-                                        <rect key="frame" x="0.0" y="313" width="22.666666666666668" height="32"/>
+                                        <rect key="frame" x="16" y="0.0" width="311" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="pWP-n2-xRT"/>
                                         </constraints>
@@ -138,7 +138,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="n2c-Dy-43j">
-                                        <rect key="frame" x="34.666666666666657" y="175" width="308.33333333333337" height="308"/>
+                                        <rect key="frame" x="0.0" y="44" width="343" height="342.66666666666669"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="n2c-Dy-43j" secondAttribute="height" multiplier="1:1" id="ZAh-AW-Wrm"/>
                                         </constraints>
@@ -146,12 +146,26 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PTi-aU-oLo" firstAttribute="leading" secondItem="DIW-JB-gV8" secondAttribute="leading" constant="16" id="KrG-qC-y2A"/>
+                                    <constraint firstAttribute="trailing" secondItem="PTi-aU-oLo" secondAttribute="trailing" constant="159" id="VpA-Vr-ELk">
+                                        <variation key="heightClass=regular" constant="16"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="PTi-aU-oLo" secondAttribute="trailing" constant="16" id="Xli-cx-t19"/>
+                                    <constraint firstItem="PTi-aU-oLo" firstAttribute="leading" secondItem="DIW-JB-gV8" secondAttribute="leading" constant="159" id="hAa-6W-EdB">
+                                        <variation key="heightClass=regular" constant="16"/>
+                                    </constraint>
                                     <constraint firstItem="PTi-aU-oLo" firstAttribute="centerY" secondItem="DIW-JB-gV8" secondAttribute="centerY" id="tIB-PV-W1Z"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="VpA-Vr-ELk"/>
+                                        <exclude reference="hAa-6W-EdB"/>
                                         <exclude reference="tIB-PV-W1Z"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="VpA-Vr-ELk"/>
+                                        <include reference="hAa-6W-EdB"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -170,21 +184,24 @@
                             <constraint firstItem="n2c-Dy-43j" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="cPA-Z0-Snk"/>
                             <constraint firstItem="DIW-JB-gV8" firstAttribute="top" secondItem="i3R-RY-E7j" secondAttribute="top" constant="32" id="e6l-Ys-SSS">
                                 <variation key="widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                             </constraint>
                             <constraint firstItem="DIW-JB-gV8" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="gzk-br-98t"/>
-                            <constraint firstItem="i3R-RY-E7j" firstAttribute="bottom" secondItem="DIW-JB-gV8" secondAttribute="bottom" constant="274" id="mfm-MX-ON4">
-                                <variation key="widthClass=compact" constant="16"/>
-                            </constraint>
+                            <constraint firstItem="n2c-Dy-43j" firstAttribute="leading" secondItem="i3R-RY-E7j" secondAttribute="leading" constant="16" id="uVJ-kP-mzY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="i3R-RY-E7j"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="mfm-MX-ON4"/>
+                                <exclude reference="uVJ-kP-mzY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <include reference="uVJ-kP-mzY"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="mfm-MX-ON4"/>
                                 <exclude reference="cPA-Z0-Snk"/>
                             </mask>
                         </variation>
