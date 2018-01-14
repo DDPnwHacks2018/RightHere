@@ -33,13 +33,11 @@ exports.createPost = function(req, res) {
         var post = req.body;
         post.author = user;
         // store and compute image hash
-        console.log(post);
         if (post.images) {
             post.images = imProcessor.uploadImages(post.images);
         }
         Post.create(post, function (err, new_post) {
             if (err) return res.send(false);
-            console.log('saved');
 
             // add post to user's own post
             // might be implemented??
@@ -77,7 +75,7 @@ exports.replyPost = function(req, res) {
                         loc: post.loc,
                         reply: re
                     }));
-                    
+
                     res.send(true);
                 });
             });
