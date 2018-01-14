@@ -8,13 +8,13 @@ export default class Post extends React.Component {
         super(props);
     }
 
-    
+
     handleAddComment = (e) => {
         e.preventDefault();
 
         const comment = e.target.elements.comment.value.trim();
 
-        setState((prevState) => ({
+        this.setState((prevState) => ({
             comments: prevState.comments.concat(comment)
         }));
 
@@ -39,13 +39,14 @@ export default class Post extends React.Component {
                         <a> send </a>
                     </div>
 
-                    
+
                     <form className="add-option" onSubmit={this.handleAddComment}>
                         <input className="add-option__input" type="text" name="comment" />
                         <button className="btn btn-primary">Send</button>
                     </form>
-                    
+
                 </div>
             </div>
-    );
+        );
+    }
 }
