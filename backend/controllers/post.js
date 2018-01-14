@@ -8,9 +8,9 @@ exports.getPosts = function(req, res) {
     // get user
     var userName = "hls";
     User.findOne({name: userName}, function(err, user) {
-        // get all posts within the disply distance
+        // get all posts within the display distance
         Post.find(function(err, posts) {
-            res.json({posts});
+            res.json(posts);
         });
     });
 };
@@ -58,15 +58,18 @@ exports.replyPost = function(req, res) {
                 if (err) throw err;
                 
                 // add to post replies
-                post.replies.push(re);
+                if (post.replies == null)
+                    post.replies = [re];
+                else
+                    post.replies.push(re);
 
                 // save post
-                post.save(function(err, updatedPost) {
+                post.save.then(function(err, updatedPost) {
                     if (err) throw err;
 
-                    res.send(true);                    
+                    res.send(true);
                 });
             });
         });
-    });     
+    });
 };
