@@ -2,7 +2,8 @@ import React from 'react';
 import MainPage from '../components/MainPage/MainPage';
 import PostCreatePage from '../components/PostCreatePage/PostCreatePage';
 import ProfilePage from '../components/ProfilePage/ProfilePage';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+//import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const AppRouter = () => (
     <BrowserRouter>

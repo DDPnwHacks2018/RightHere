@@ -8,7 +8,6 @@ export default class ProfilePage extends React.Component {
 
     render() {
         return (
-
             <div className="container">
                 <ProfileHeader />
                 <div className="row">

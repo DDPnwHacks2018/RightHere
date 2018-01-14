@@ -1,5 +1,5 @@
 import React from 'react';
-import Comments from './Comments';
+//import Comments from './Comments';
 
 import './Post.css';
 
@@ -14,7 +14,7 @@ export default class Post extends React.Component {
 
         const comment = e.target.elements.comment.value.trim();
 
-        this.setState((prevState) => ({
+        setState((prevState) => ({
             comments: prevState.comments.concat(comment)
         }));
 
@@ -30,18 +30,13 @@ export default class Post extends React.Component {
                         <div className="col-4"> </div>
                         <div className="col-4"> </div>
                     </div>
-                    <div className="row postText">
-                        <div className="col">
-                            {this.props.text}
-                        </div>
+                </div>
+                <div className="row replyCreate">
+                    <div className="col-8">
+                        <textarea rows={1}></textarea>
                     </div>
-                    <div className="row replyCreate">
-                        <div className="col-8">
-                            <textarea rows={1}> </textarea>
-                        </div>
-                        <div className="col-4">
-                            <a> send </a>
-                        </div>
+                    <div className="col-4">
+                        <a> send </a>
                     </div>
 
                     
@@ -51,8 +46,6 @@ export default class Post extends React.Component {
                     </form>
                     
                 </div>
-
-            </div >
-        );
-    }
+            </div>
+    );
 }
