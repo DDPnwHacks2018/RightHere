@@ -12,7 +12,7 @@ export default class ProfileHeader extends React.Component{
     };
     render(){
         return(
-            <div>
+            <div className="container">
                 <ul className="nav nav-pills nav-justified">
                     <li className="nav-item">
                         <a className="nav-link" href="/">Home</a>
