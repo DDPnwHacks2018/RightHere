@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
+var Reply = mongoose.model('Reply');
+var socketC = require('socket.io-client')('http://localhost:3000');
 
 exports.getPosts = function(req, res) {
     // get user
@@ -26,12 +28,45 @@ exports.createPost = function(req, res) {
             // add post to user's own post
             // might be implemented??
 
-            res.json({succ: true});
+            // send update 
+            Post.find(function(err, posts) {
+                if (err) return err;
+                socketC.emit("do update", posts);
+            });
+
+            res.send(true);
         });
     });
 };
 
+
 exports.replyPost = function(req, res) {
     // reply to Post
-    res.send('post created');
+    var username = "hls";
+    var post_id = req.query.post_id;
+    
+    User.find({name: username}, function(err, user) {
+        Post.find({_id: req.query.post_id}, function(err, post) {
+            var reply = {
+                text: req.query.text,
+                author: user,
+                post: post
+            };
+
+            // insert to db
+            Reply.create(reply, function(err, re) {
+                if (err) throw err;
+                
+                // add to post replies
+                post.replies.push(re);
+
+                // save post
+                post.save(function(err, updatedPost) {
+                    if (err) throw err;
+
+                    res.send(true);                    
+                });
+            });
+        });
+    });     
 };

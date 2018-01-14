@@ -18,6 +18,7 @@ db.once('open', function() {
 
 require('./models/User');
 require('./models/Post');
+require('./models/Reply');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
