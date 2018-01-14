@@ -34,11 +34,12 @@ module.exports = function(server) {
 
             data = JSON.parse(data);
 
-            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'socket_id', function (err, users){
+            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'loc socket_id', function (err, users){
                 if (err) throw err;
+                console.log(users);
                 for (var key in users) {
-                    if (idToSocketObject.hasOwnProperty(key)) {
-                        idToSocketObject[key].emit("new_post", data);
+                    if (idToSocketObject.hasOwnProperty(key.socked_id)) {
+                        idToSocketObject[key.socked_id].emit("new_post", data);
                     }
                 }
             });
