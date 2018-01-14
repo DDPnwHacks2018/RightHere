@@ -10,7 +10,7 @@ exports.createUserInfo = function (socket_id, loc) {
         socket_id: socket_id
     };
 
-    User.create(user, function(err) {
+    User.create(user, function(err, user) {
         if (err) throw err;
     });
 };
