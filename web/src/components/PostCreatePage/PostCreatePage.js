@@ -94,10 +94,13 @@ export default class PostCreatePage extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container postCreatePage">
                 <PostCreateHeader onCreatePost={this.onCreatePost} />
-                <h3>Enter your Text</h3>
-                <textarea className="createTextContent" rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
+                <div className="row createTextContent">
+                    <div className="col">
+                        <textarea rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
+                    </div>
+                </div>
                 <ImageUpload
                     previewUrl={this.state.imageDataUrl}
                     onChange={this.onImageUploadChange} />

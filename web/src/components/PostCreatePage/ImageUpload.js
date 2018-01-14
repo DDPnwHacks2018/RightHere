@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ImageUpload(props) {
   return (
-    <div>
+    <div className="row imageUpload">
       <input type="file" onChange={(e) => props.onChange(e.target.files[0])} />
 
       {props.previewUrl

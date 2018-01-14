@@ -84,48 +84,43 @@ export default class Post extends React.Component {
                 <div className="row post">
                     <div className="col">
                         <div className="row postHeader">
-                            <div className="col-4"><i class="fa fa-clock-o" aria-hidden="true"></i> {this.props.time} </div>
-                            <div className="col-4"> <i class="fa fa-map-marker" aria-hidden="true"></i> {this.props.location}</div>
+                            <div className="col-4"><i className="fa fa-clock-o" aria-hidden="true"></i> {humanize(this.props.time)} </div>
+                            <div className="col-4"> <i className="fa fa-map-marker" aria-hidden="true"></i> UBC</div>
                             <div className="col-4"> </div>
                         </div>
+                        <hr />
                         <div className="row postContent">
                             <div className="col-12">{this.props.text}</div>
                         </div>
-                        
-                    </div>
-                </div>
-                <div className="row replyCreate">
-                    <div className="col-10 reply">{this.props.comments} </div>
-                    <hr/>
-                    <div className="col-10">
-                        <textarea placeholder="Add Your Comment"></textarea>
-                    </div>
-                    {
-                        this.props.images && this.props.images.length > 0 && (
-                            <div className="row postPicture">
-                                <div className="col">
-                                    <img src={"data:image/jpg;base64," + this.props.images[0]} alt="preview img" />
+                        {
+                            this.props.images && this.props.images.length > 0 && (
+                                <div className="row postPicture">
+                                    <div className="col">
+                                        <img src={"data:image/jpg;base64," + this.props.images[0]} alt="preview img" />
+                                    </div>
                                 </div>
+                            )
+                        }
+                        {
+                            this.props.replies && this.props.replies.map((reply) => (
+                                <div className="row postReplies" key={reply._id} >
+                                    <div className="col">{reply.text}</div>
+                                </div>
+                            ))
+                        }
+                        <div className="row replyCreate">
+                            <div className="col-10">
+                                <textarea placeholder="Add Your Comment" ref={input => this.textareaEle = input}></textarea>
                             </div>
-                        )
-                    }
-                    {
-                        this.props.replies && this.props.replies.map((reply) => (
-                            <div className="row postReplies" key={reply._id} >
-                                <div className="col">{reply.text}</div>
+                            <div className="col-2 sendBtn">
+                                <button className="btn btn-primary" onClick={this.onReplyPost}> Send </button>
                             </div>
-                        ))
-                    }
-                    <div className="row replyCreate">
-                        <div className="col-10">
-                            <textarea placeholder="Add Your Comment" ref={input => this.textareaEle = input}></textarea>
                         </div>
-                        <div className="col-2 sendBtn">
-                            <button className="btn btn-primary" onClick={this.onReplyPost}> Send </button>
-                        </div>
+
+
                     </div>
-                    <Line />
                 </div>
+
             </div>
         );
     }

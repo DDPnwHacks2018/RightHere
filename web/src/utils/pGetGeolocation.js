@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const pGetGeolocation = () => {
-    return axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC1uF9z1i0vTK9nlTX7kHgiCQJmqB9kqeY")
+    return axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAsPudtiItg4I-2s22XDH_jFbZjbg7orHs")
         .then((res) => {
             return res.data.location;
             /* 

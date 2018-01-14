@@ -1,7 +1,8 @@
-.body{
+body {
     font-family: "Montserrat", "Avenir";
-    background-color: #555555;
+    background-color: #D3D3D3;
 }
+
 .container .link-left{
     float: left;
     margin-left: 10px;
@@ -33,7 +34,7 @@
 .Header{
     background-color:rgb(80, 149, 206);
     opacity: 50%;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 
@@ -92,59 +93,6 @@ img{
     width: 200px;
 }
 
-.post > .col {
-    margin-bottom: 10px;
-}
-
-.post .line {
-    height: 5px;
-    border-bottom-style: dashed;
-    border-bottom-width: 1px;
-}
-
-.postContent .col {
-    display: flex;
-    justify-content: left;
-<<<<<<< HEAD
-    border-radius: 5px;
-    height: 50px;
-=======
-    /*height: 70px;*/
-    /*border-bottom-style: dashed;*/
-    /*border-bottom-width: 1px;*/
->>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
-}
-
-.postHeader{
-    border-top: 2px solid rgba(0,0,0,0.2);
-}
-
-.postPicture img {
-    max-height: 600px;
-}
-
-.replyCreate {
-    padding: 2.5px;
-}
-
-.replyCreate textarea{
-    height: 25px;
-    margin-top: 0px;
-}
-.replyCreate button{
-    position: relative;
-<<<<<<< HEAD
-    height: 30px;
-=======
-    height: 25px;
-    /*bottom: -30px;*/
->>>>>>> fd718a292bb012f62ba9b33bfcb5b59a0fe579e5
-    text-align: center;
-    border: 0px;
-    margin: 0px;
-    padding: 0px 5px;
-}
-
 textarea {
     margin: 0px;
     width: 500px;
@@ -166,16 +114,21 @@ textarea {
     line-height: 1.4em;
     padding: 5px 8px;
     transition: background-color 0.2s ease 0s;
-  }
+}
   
-  textarea:focus {
-      background: none repeat scroll 0 0 #FFFFFF;
-      outline-width: 0;
-  }
+.postCreatePage textarea {
+    min-height: 150px;
+    width: 100%;
+}
 
-  .createTextContent{
-      height: 150px;
-  }
+textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
+
+.createTextContent{
+    height: 150px;
+}
 
 @media (min-width: 576px) {
     .container{
