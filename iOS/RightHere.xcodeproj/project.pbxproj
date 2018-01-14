@@ -19,8 +19,11 @@
 		86FAAEC3EE0264D52CE31E55 /* Pods_RightHereTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22BDF246D96BC9EAC170DA8 /* Pods_RightHereTests.framework */; };
 		944B5727492791459B95D125 /* Pods_RightHere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3679107A5E5B6C7378A6F92 /* Pods_RightHere.framework */; };
 		ABFFC324A0EEE1CF2584AC44 /* RHCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFCF9B2E43B1E77E005CD1 /* RHCollectionViewCell.swift */; };
+		ABFFC3B5161762F81DF13BD0 /* RHConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFCD0FD5503AA970047A5A /* RHConsts.swift */; };
 		ABFFC49B5736A4F8988DEE2E /* RHCameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFC38951EA3E8ED48947F8 /* RHCameraHandler.swift */; };
 		ABFFC81D14AA79F9FF969EED /* RHAddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFCB5C28EF6CF762EA4D95 /* RHAddPostViewController.swift */; };
+		ABFFCD0277249E2D900FE63B /* RHPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFCF3116C6E56AAD9B2EFC /* RHPost.swift */; };
+		ABFFCD2D90A42D3CE103B229 /* RHHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFC8FB9A028A75B5C4DC19 /* RHHack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +65,10 @@
 		76FE0FD4200ABC270031C99E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B8A8662F91EF254BCEB343 /* Pods-RightHere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RightHere.release.xcconfig"; path = "Pods/Target Support Files/Pods-RightHere/Pods-RightHere.release.xcconfig"; sourceTree = "<group>"; };
 		ABFFC38951EA3E8ED48947F8 /* RHCameraHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCameraHandler.swift; sourceTree = "<group>"; };
+		ABFFC8FB9A028A75B5C4DC19 /* RHHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHHack.swift; sourceTree = "<group>"; };
 		ABFFCB5C28EF6CF762EA4D95 /* RHAddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHAddPostViewController.swift; sourceTree = "<group>"; };
+		ABFFCD0FD5503AA970047A5A /* RHConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHConsts.swift; sourceTree = "<group>"; };
+		ABFFCF3116C6E56AAD9B2EFC /* RHPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHPost.swift; sourceTree = "<group>"; };
 		ABFFCF9B2E43B1E77E005CD1 /* RHCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE198B87291E7D185C580918 /* Pods-RightHere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RightHere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RightHere/Pods-RightHere.debug.xcconfig"; sourceTree = "<group>"; };
 		C22BDF246D96BC9EAC170DA8 /* Pods_RightHereTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RightHereTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +161,9 @@
 				ABFFCF9B2E43B1E77E005CD1 /* RHCollectionViewCell.swift */,
 				ABFFCB5C28EF6CF762EA4D95 /* RHAddPostViewController.swift */,
 				ABFFC38951EA3E8ED48947F8 /* RHCameraHandler.swift */,
+				ABFFC8FB9A028A75B5C4DC19 /* RHHack.swift */,
+				ABFFCF3116C6E56AAD9B2EFC /* RHPost.swift */,
+				ABFFCD0FD5503AA970047A5A /* RHConsts.swift */,
 			);
 			path = RightHere;
 			sourceTree = "<group>";
@@ -484,6 +493,9 @@
 				ABFFC324A0EEE1CF2584AC44 /* RHCollectionViewCell.swift in Sources */,
 				ABFFC81D14AA79F9FF969EED /* RHAddPostViewController.swift in Sources */,
 				ABFFC49B5736A4F8988DEE2E /* RHCameraHandler.swift in Sources */,
+				ABFFCD2D90A42D3CE103B229 /* RHHack.swift in Sources */,
+				ABFFCD0277249E2D900FE63B /* RHPost.swift in Sources */,
+				ABFFC3B5161762F81DF13BD0 /* RHConsts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import SocketIO
 import MaterialComponents
 
@@ -15,14 +16,7 @@ class RHCollectionViewController: MDCCollectionViewController {
     let appBar = MDCAppBar()
     let appBarMinimumHeight: CGFloat = 100.0
     let appBarMaximumHeight: CGFloat = 240.0
-    let fakeData = [
-        ["text": "Text 1 ............................................................"],
-        ["text": "Text 2"],
-        ["text": "Text 3 ..................."],
-        ["text": "Text 4 Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text "],
-        ["text": "Text 5"],
-        ["text": "Text 6"],
-    ]
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     // MARK: - Life Cycle
 
@@ -50,29 +44,15 @@ class RHCollectionViewController: MDCCollectionViewController {
         // After all other views have been registered.
         appBar.addSubviewsToParent()
 
-        if UIDevice().userInterfaceIdiom == .phone {
-            switch UIScreen.main.nativeBounds.height {
-            case 1136:
-                print("iPhone 5 or 5S or 5C")
-            case 1334:
-                print("iPhone 6/6S/7/8")
-            case 2208:
-                print("iPhone 6+/6S+/7+/8+")
-            case 2436:
-                print("iPhone X")
-            default:
-                print("unknown")
-            }
-        }
-
-        let headerView = appBar.headerViewController.headerView
-
         // Setup header height
+        let headerView = appBar.headerViewController.headerView
         headerView.minimumHeight = appBarMinimumHeight
         headerView.maximumHeight = appBarMaximumHeight
 
         // Set the tracking scroll view
-        headerView.trackingScrollView = self.collectionView;
+        headerView.trackingScrollView = self.collectionView
+
+        headerView.backgroundColor = UIColor(red: 0.0, green: 0.67, blue: 0.55, alpha: 1.0)
 
         // Set background image for appBar
         let imageView = UIImageView(image: UIImage(named: "AppBar"))
@@ -81,22 +61,50 @@ class RHCollectionViewController: MDCCollectionViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         headerView.insertSubview(imageView, at: 0)
-        headerView.backgroundColor = .clear
-        appBar.navigationBar.tintColor = .purple
 
+        // Add Ink Effect
+        let inkTouchController = MDCInkTouchController(view: headerView)
+        inkTouchController.addInkView()
+
+        // Add Menu Button
         let menuButton = UIBarButtonItem(image: UIImage(named: "AddPost"), style: .done, target: self, action: #selector(onMenuButtonClicked(sender:)))
-        self.navigationItem.rightBarButtonItem = menuButton;
-    }
+        self.navigationItem.rightBarButtonItem = menuButton
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Notification
+        NotificationCenter.default.addObserver(self, selector: #selector(onPostsUpdate(notification:)), name: .NotificationPostDidSet, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onSendComment(notification:)), name: .NotificationSendComment, object: nil)
     }
 
     // MARK: - Actions
 
     @objc func onMenuButtonClicked(sender: Any) {
         self.performSegue(withIdentifier: "AddPost", sender: sender)
+    }
+
+    @objc func onPostsUpdate(notification: NSNotification) {
+        self.collectionView?.reloadData()
+    }
+
+    @objc func onSendComment(notification: NSNotification) {
+        let row = notification.userInfo?["row"] as! Int
+        let comment = notification.userInfo?["comment"] as! String
+        if comment == "" {
+            let alert = UIAlertController(title: "Alert", message: "Comment is empty, please fill it first", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        let parameters: Parameters = [
+            "post_id": appDelegate.posts[row].id,
+            "text": comment,
+        ]
+
+        Alamofire.request(apiReplyPost, method: .post, parameters: parameters).responseJSON { response in
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)") // original server data as UTF8 string
+            }
+        }
     }
 
     // MARK: - StatusBarStyle
@@ -112,35 +120,29 @@ class RHCollectionViewController: MDCCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return appDelegate.posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 
         if let RHCell = cell as? RHCollectionViewCell {
-            RHCell.postText.text = fakeData[indexPath.row]["text"]
+            if appDelegate.posts[indexPath.row].images?[0] != nil {
+                let decodedImage = UIImage(data: Data(base64Encoded: "data:image/jpeg;base64," + appDelegate.posts[indexPath.row].images![0])!)
+                RHCell.postImageView.image = decodedImage
+            } else {
+                RHCell.postImageView.image = UIImage(named: "PlaceHolder")
+            }
+            RHCell.postText.text = appDelegate.posts[indexPath.row].text
         }
 
         return cell
     }
 
-    // MARK: - UICollectionViewDelegate
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let manager = SocketManager(socketURL: URL(string: "http://169.254.129.166:3000")!, config: [.log(true), .compress])
-        let socket = manager.defaultSocket
-
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-        }
-
-        socket.connect()
-    }
-
     // MARK: - UICollectionViewDelegateFlowLayout
 
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 375, height: 300)
+        return CGSize(width: 375, height: 500)
     }
 
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -9,20 +9,43 @@ import MaterialComponents
 
 class RHAddPostViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    @IBOutlet var newPostText: UITextField!
+    @IBOutlet var newPostStackView: UIStackView!
+    @IBOutlet var newPostTextField: MDCTextField!
     @IBOutlet var newPostImageView: UIImageView!
-    
+
+    let appBar = MDCAppBar()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     // MARK: - Life Cycle
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+
+        self.addChildViewController(appBar.headerViewController)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        self.addChildViewController(appBar.headerViewController)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // After all other views have been registered.
+        appBar.addSubviewsToParent()
+        let headerView = appBar.headerViewController.headerView
+        headerView.backgroundColor = UIColor(red: 0.0, green: 0.67, blue: 0.55, alpha: 1.0)
+        appBar.navigationBar.tintColor = .white
+
+        // Add Menu Button
         let menuButton = UIBarButtonItem(image: UIImage(named: "SendPost"), style: .done, target: self, action: #selector(onMenuButtonClicked(sender:)))
         self.navigationItem.rightBarButtonItem = menuButton;
 
@@ -53,29 +76,59 @@ class RHAddPostViewController: UIViewController, UINavigationControllerDelegate,
     }
 
     @objc func onMenuButtonClicked(sender: Any) {
-        Alamofire.request("http://169.254.129.166/posts/create").responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
+        if self.newPostTextField.text == "" {
+            let alert = UIAlertController(title: "Alert", message: "Text is empty, please fill it first", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
 
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-            }
+        if self.newPostImageView.image == nil {
+            let alert = UIAlertController(title: "Alert", message: "Image is empty, please upload it first", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
 
+        let parameters: Parameters = [
+            "text": self.newPostTextField.text!,
+            "images": [convertImageToBase64(image: self.newPostImageView.image!)],
+            "loc": [
+                appDelegate.locationManager.location!.coordinate.latitude,
+                appDelegate.locationManager.location!.coordinate.longitude,
+            ]
+        ]
+
+        Alamofire.request(apiCreatePost, method: .post, parameters: parameters).responseJSON { response in
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)") // original server data as UTF8 string
+                let alert = UIAlertController(title: "Alert", message: "Upload", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
             }
         }
     }
 
+    // MARK: - StatusBarStyle
+
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return appBar.headerViewController
+    }
+
     // MARK: - UIImagePickerControllerDelegate
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
-
         self.newPostImageView.image = image
-
         picker.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - Utils
+
+    func convertImageToBase64(image: UIImage) -> String {
+        let imageData = UIImagePNGRepresentation(image)!
+        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
     }
 }
 

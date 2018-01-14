@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.5.1)
+  - MaterialComponents/AnimationTiming (35.0.0)
   - MaterialComponents/AppBar (35.0.0):
     - MaterialComponents/AppBar/ColorThemer (= 35.0.0)
     - MaterialComponents/AppBar/Component (= 35.0.0)
@@ -111,6 +112,7 @@ PODS:
     - MaterialComponents/private/RTL
     - MaterialComponents/Typography
     - MDFTextAccessibility
+  - MaterialComponents/Palettes (35.0.0)
   - MaterialComponents/private/Application (35.0.0)
   - MaterialComponents/private/Icons/Base (35.0.0)
   - MaterialComponents/private/Icons/ic_arrow_back (35.0.0):
@@ -131,6 +133,18 @@ PODS:
   - MaterialComponents/private/RTL (35.0.0)
   - MaterialComponents/ShadowElevations (35.0.0)
   - MaterialComponents/ShadowLayer (35.0.0)
+  - MaterialComponents/TextFields (35.0.0):
+    - MaterialComponents/TextFields/ColorThemer (= 35.0.0)
+    - MaterialComponents/TextFields/Component (= 35.0.0)
+  - MaterialComponents/TextFields/ColorThemer (35.0.0):
+    - MaterialComponents/TextFields/Component
+    - MaterialComponents/Themes
+  - MaterialComponents/TextFields/Component (35.0.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/RTL
+    - MaterialComponents/Typography
   - MaterialComponents/Themes (35.0.0)
   - MaterialComponents/Typography (35.0.0):
     - MaterialComponents/private/Application
@@ -144,6 +158,8 @@ DEPENDENCIES:
   - MaterialComponents/AppBar
   - MaterialComponents/Buttons
   - MaterialComponents/Collections
+  - MaterialComponents/Ink
+  - MaterialComponents/TextFields
   - Socket.IO-Client-Swift (~> 13.1.0)
 
 SPEC CHECKSUMS:
@@ -153,6 +169,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: f22222913f29801e30ae0df712db663ec096edc2
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
 
-PODFILE CHECKSUM: 0e0d8a2cb274b9f8e9aacb9871fd6943af2b9569
+PODFILE CHECKSUM: 551a090cf54465c4381f6cf16c2319005881a4a5
 
 COCOAPODS: 1.3.1

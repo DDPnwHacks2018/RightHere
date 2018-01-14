@@ -9,14 +9,14 @@ target 'RightHere' do
   pod 'MaterialComponents/AppBar'
   pod 'MaterialComponents/Buttons'
   pod 'MaterialComponents/Collections'
+  pod 'MaterialComponents/Ink'
+  pod 'MaterialComponents/TextFields'
 
   # Socket.io
   pod 'Socket.IO-Client-Swift', '~> 13.1.0'
 
   # Networking library
   pod 'Alamofire', '~> 4.5'
-
-  # Pods for RightHere
 
   target 'RightHereTests' do
     inherit! :search_paths

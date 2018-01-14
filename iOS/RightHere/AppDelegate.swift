@@ -7,17 +7,86 @@
 //
 
 import UIKit
+import Alamofire
 import CoreData
+import CoreLocation
+import SocketIO
+
+extension Notification.Name {
+    static let NotificationPostDidSet = Notification.Name(notificationPostDidSet)
+}
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
 
+    let locationManager = CLLocationManager()
+    let socketManager = SocketManager(socketURL: URL(string: "http://\(ip):3000")!, config: [.log(true), .compress])
+    var posts: [RHPost] = [] {
+        didSet {
+            NotificationCenter.default.post(name: .NotificationPostDidSet, object: nil)
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Request Location Service
+        locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.distanceFilter = 10.0  // In meters.
+            locationManager.startUpdatingLocation()
+        }
+
         // Override point for customization after application launch.
+        let socket = socketManager.defaultSocket
+        socket.on(clientEvent: .connect, callback: {data, ack in
+            let parameters = [
+                "loc": [
+                    self.locationManager.location!.coordinate.latitude,
+                    self.locationManager.location!.coordinate.longitude,
+                ]
+            ]
+
+            Alamofire.request(apiGetPost, method: .post, parameters: parameters).responseJSON { response in
+                if let data = response.data, let jsonString = String(data: data, encoding: .utf8) {
+                    print(jsonString)
+                    let jsonData = (jsonString).data(using: .utf8)!
+                    let decoder = JSONDecoder()
+                    do {
+                        let posts = try decoder.decode(_: RHPosts.self, from: jsonData)
+                        self.posts = (posts as RHPosts).posts
+                    } catch let err {
+                        print("Err", err)
+                    }
+                }
+            }
+        })
+        socket.on("new_post", callback: {data, ack in
+            print("New post", data)
+        })
+        socket.on("new_reply", callback: {data, ack in
+            print("New reply", data)
+        })
+        socket.connect()
+
         return true
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let socket = socketManager.defaultSocket
+        let parameters = [
+            "loc": [
+                manager.location!.coordinate.latitude,
+                manager.location!.coordinate.longitude,
+            ]
+        ]
+        socket.emit("update_user_loc", parameters)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error!")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

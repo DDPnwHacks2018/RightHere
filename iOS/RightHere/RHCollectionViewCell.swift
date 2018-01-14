@@ -3,8 +3,12 @@
 // Copyright (c) 2018 DDPnwHacks2018. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MaterialComponents
+
+extension Notification.Name {
+    static let NotificationSendComment = Notification.Name(notificationSendComment)
+}
 
 class RHCollectionViewCell: MDCCollectionViewCell {
 
@@ -13,8 +17,13 @@ class RHCollectionViewCell: MDCCollectionViewCell {
     @IBOutlet var commentTextField: UITextField!
     @IBOutlet var commentSendButton: MDCButton!
 
-    override class func setAnimationCurve(_ curve: UIViewAnimationCurve) {
-        super.setAnimationCurve(curve)
+    @IBAction func onCommentButtonClicked(_ sender: MDCButton) {
+        let indexPath: IndexPath? = (self.superview as! UICollectionView).indexPath(for: self)
+        let info : [String: AnyHashable] = [
+            "row": indexPath!.row,
+            "comment" : commentTextField.text!,
+        ]
+        NotificationCenter.default.post(name: .NotificationSendComment, object: nil, userInfo: info)
     }
 }
 
