@@ -54,9 +54,10 @@ module.exports = function(server) {
             console.log('Content:' + data);
 
             data = JSON.parse(data);
-            var testLoc = [10,15];
+            // Dirty solve
+            data.reply.post_id = data.reply.post_id._id;
 
-            User.find({loc: {$near: testLoc, $maxDistance: 5}}, 'loc socket_id', function (err, users){
+            User.find({loc: {$near: data.loc, $maxDistance: 5}}, 'loc socket_id', function (err, users){
                 if (err) throw err;
                 console.log(users);
                 users.forEach(function(user){

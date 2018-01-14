@@ -11,10 +11,13 @@ exports.getPosts = function(req, res) {
     //User.findOne({}, function(err, user) {
         // get all posts within the display distance
         var loc = req.body.loc;
+        req.body.loc[0] = Number(req.body.loc[0]);
+        req.body.loc[1] = Number(req.body.loc[1]);
         Post.find({loc: {$near: loc, $maxDistance: 5}}, '_id time images loc text')
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
-            if (err) return res.send(false);
+            //if (err) return res.send(false);
+            if (err) throw err;
             
             // retrive image
             posts.forEach(function(post) {
