@@ -72,8 +72,12 @@ exports.replyPost = function(req, res) {
                 if (err) return res.send(false);
                 post.update({ "$push": { "replies": re }}, function(err){
                     if (err) return res.send(false);
-
-                    socketC.emit("do_update_reply", JSON.stringify(re));
+                    
+                    socketC.emit("do_update_reply", JSON.stringify({
+                        loc: post.loc,
+                        reply: re
+                    }));
+                    
                     res.send(true);
                 });
             });
