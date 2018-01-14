@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // connect to database
-mongoose.connect('mongodb://localhost:mydb', {useMongoClient: true});
+mongoose.connect('mongodb://localhost/mydb', {useMongoClient: true});
+mongoose.Promise = global.Promise;
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

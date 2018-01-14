@@ -15,6 +15,7 @@ module.exports = function(server) {
         });
 
         socket.on('gather information', function(data){
+            io.emit('update', data);
             console.log('Changes detected, push to clients.');
             console.log('Content:' + data);
         });
