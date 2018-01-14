@@ -30,25 +30,19 @@ exports.uploadImages = function (images) {
   }
 };
 
-exports.getImages = function (req, res) {
+exports.getImages = function (imagesHash) {
   try {
     const retImages = [];
-    const imagesHash = req.body.images;
 
     for (let i = 0; i < imagesHash.length; i += 1) {
       const pathMd5 = imagesHash[i];
       const pathFolder = path.resolve(__dirname, '../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
       const data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`).toString('base64');
-      retImages.push({
-        imageHash: imagesHash[i],
-        imageData: data,
-      });
+      retImages.push(data);
     }
 
-    return res.json({
-      images: retImages,
-    });
+    return retImages;
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    return null;
   }
 };

@@ -6,7 +6,7 @@ var ObjectId = Schema.ObjectId;
 var userSchema = new Schema({
     name: String,
     posts: [{type: ObjectId, ref: 'Post'}],
-    loc: {loc_name: String, x: Number, y:Number}
+    loc: {type: [Number], index: '2d'}
 });
 
 mongoose.model('User', userSchema);
