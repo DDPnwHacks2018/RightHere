@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var imProcessor = require('./image');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
 var Reply = mongoose.model('Reply');
@@ -17,6 +18,7 @@ exports.getPosts = function(req, res) {
 
 exports.createPost = function(req, res) {
     // store the new post to db
+    console.log(req.body);
     var username = 'hls';
     User.findOne({name: username}, function(err, user) {
         var post = req.query;
@@ -70,3 +72,7 @@ exports.replyPost = function(req, res) {
         });
     });     
 };
+function newFunction() {
+    var imProcessor = require('./image');
+}
+

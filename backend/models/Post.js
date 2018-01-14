@@ -9,6 +9,7 @@ var postSchema = new Schema({
     author: User,
     text: String,
     replies: [Reply],
+    images: [String],
     time: {type: Date, default: Date.now},
     loc: {loc_name: String, x: Number, y:Number}
 });
