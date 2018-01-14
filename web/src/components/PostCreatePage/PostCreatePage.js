@@ -33,7 +33,7 @@ export default class PostCreatePage extends React.Component {
 
         this.state = {
             image: null,
-            imagePreviewUrl: null,
+            imageDataUrl: null,
         };
         this.textareaEle = null;
 
@@ -57,6 +57,20 @@ export default class PostCreatePage extends React.Component {
 
         const textData = this.textareaEle.value.trim();
 
+        pGetGeolocation()
+            .then((geolocation) => {
+                const data = {
+                    text: textData,
+                    images: this.state.imageDataUrl ? [this.state.imageDataUrl] : [],
+                    loc: [geolocation.lat, geolocation.lng],
+                };
+                console.log("PostCreatePage:onCreatePost: ", data);
+                // TODO, create post, jump back to main page
+            })
+            .then(() => {
+                this.props.history.push('/');
+            });
+        /*
         axios.all([this.pLoadImageData(), pGetGeolocation()])
             .then(axios.spread((imageData, geolocation) => {
                 const data = {
@@ -67,16 +81,17 @@ export default class PostCreatePage extends React.Component {
                 console.log("PostCreatePage:onCreatePost: ", data);
                 // TODO, create post, jump back to main page
             }));
+        */
     };
 
     onImageUploadChange(image) {
         console.log("PostCreatePage:onImageUploadChange - name: ", image.name);
 
         pFileUrlReader(image)
-            .then((imagePreviewUrl) => {
+            .then((imageDataUrl) => {
                 this.setState({
                     image: image,
-                    imagePreviewUrl: imagePreviewUrl,
+                    imageDataUrl: imageDataUrl,
                 });
             });
     }
@@ -87,7 +102,7 @@ export default class PostCreatePage extends React.Component {
                 <PostCreateHeader onCreatePost={this.onCreatePost} />
                 <textarea rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
                 <ImageUpload
-                    previewUrl={this.state.imagePreviewUrl}
+                    previewUrl={this.state.imageDataUrl}
                     onChange={this.onImageUploadChange} />
             </div>
         );
