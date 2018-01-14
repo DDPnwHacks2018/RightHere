@@ -1,0 +1,85 @@
+.post textarea {
+    width: 100%;
+}
+
+.post.row { 
+    background-color: white;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+.post > .col {
+    margin-bottom: 10px;
+}
+
+.post .line {
+    height: 5px;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+}
+
+.post .postText {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.post .postContent{
+    margin-left: 3px;
+    /*background-color: rgba(0,0,0,0.1);*/
+    text-align: left;
+    min-height: 100px;
+}
+
+.postContent .col {
+    display: flex;
+    justify-content: left;
+    border-radius: 5px;
+    height: 50px;
+}
+
+.postHeader{
+    border-top: 2px solid rgba(0,0,0,0.2);
+}
+
+.postPicture img {
+    max-height: 600px;
+}
+
+.replyCreate {
+    padding: 2.5px;
+}
+
+.replyCreate textarea{
+    height: 25px;
+    margin-top: 0px;
+}
+.replyCreate button{
+    position: relative;
+    height: 25px;
+    /*bottom: -30px;*/
+    text-align: center;
+    border: 0px;
+    margin: 0px;
+    padding: 0px 5px;
+}
+
+
+.replyCreate{
+    margin-bottom: 10px;
+}
+
+.reply{
+    border: 0px;
+    margin-left: 15px;
+    padding-top: 5px;
+    margin: 0px;
+}
+
+hr{
+    width: 95%;
+    margin-top: 0px;
+    margin-bottom: 5px;
+	border-top: 1px solid #F8F8F8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}

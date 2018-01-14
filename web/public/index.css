@@ -1,21 +1,143 @@
-/* .header{
-    background-color: rgb(64, 151, 151);
-    opacity: 0.9;
-    padding-top: 10px;
-    padding-bottom: 10px;
+body {
+    font-family: "Montserrat", "Avenir";
+    background-color: #D3D3D3;
 }
 
-.header h1{
-    display: inline;
+.container .link-left{
+    float: left;
+    margin-left: 10px;
 }
 
-
-
-.middleBtn{
-    margin-left: 50%;
-    margin-right: 50%;
-}
-
-.rightBtn{
+.container .link-right{
     float: right;
-} */
+    margin-right: 10px;
+}
+
+.container .row .col {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.picture{
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    background-color: yellow;
+}
+
+.container h2{
+   text-align: center;
+}
+
+.Header{
+    background-color:rgb(80, 149, 206);
+    opacity: 50%;
+    /*margin-bottom: 10px;*/
+}
+
+
+.btn-primary{
+    background-color:rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
+    outline: none;
+    text-decoration: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:visited{
+    background-color: rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
+    outline: none;
+    opacity: 50%;
+}
+
+.name-change{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.name-change p{
+    margin-bottom: 0;
+    padding: 0;
+    padding-top: 5px;
+    padding-right: 0px;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 10px;
+}
+.name-change input{
+    margin-right: 15px;
+}
+
+.name-change button{
+    width: 60px;
+    background-color:rgb(80, 149, 206);
+    border-color: rgb(80, 149, 206);
+}
+
+.container textarea{
+    margin: auto;
+}
+
+ImageUpload{
+    margin: auto;
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+img{
+    width: 200px;
+}
+
+textarea {
+    margin: 0px;
+    width: 500px;
+    height: 40px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+    border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+    border-image: none;
+    border-radius: 6px 6px 6px 6px;
+    border-style: none solid solid none;
+    border-width: medium 1px 1px medium;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+    color: #555555;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 0.8em;
+    line-height: 1.4em;
+    padding: 5px 8px;
+    transition: background-color 0.2s ease 0s;
+}
+  
+.postCreatePage textarea {
+    min-height: 150px;
+    width: 100%;
+}
+
+textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
+
+.createTextContent{
+    height: 150px;
+}
+
+@media (min-width: 576px) {
+    .container{
+        max-width: 576px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container{
+        width: 100%;       
+    }
+}
