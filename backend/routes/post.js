@@ -1,15 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var postController = require('../controllers/post.js');
 
-/* GET home page. */
-router.post('/createPost', function(req, res, next) {
-    res.send('post created');
-});
+router.get('/', postController.getPosts);
 
-router.post('replyPost', function(req, res, next) {
-    res.send('post replied');
-});
-
-
+// these two should be get but tested with get
+router.post('/reply', postController.replyPost);
+router.post('/create', postController.createPost);
 
 module.exports = router;
