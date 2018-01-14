@@ -2,7 +2,7 @@ module.exports = function(server) {
     var io = require('socket.io')(server);
 
     io.on('connection', function(socket){
-        console.log('Client connected to socket.');
+        console.log('Someone connected to socket.');
         socket.user_id = 0;
 
         socket.on('hello', function(){
@@ -14,8 +14,13 @@ module.exports = function(server) {
             console.log('To be implemented.');
         });
 
-        socket.on('disconnection', function(){
-            console.log('Client disconnected from socket.');
+        socket.on('gather information', function(data){
+            console.log('Changes detected, push to clients.');
+            console.log('Content:' + data);
+        });
+
+        socket.on('disconnect', function(){
+            console.log('Someone disconnected from socket.');
         });
     });
 };

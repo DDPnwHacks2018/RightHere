@@ -5,7 +5,7 @@ exports.getPosts = function(req, res) {
     // get all posts within the disply distance
 
     res.send({allposts: 'allposts'});
-}
+};
 
 exports.createPost = function(req, res) {
     // store the new post to db
@@ -16,10 +16,10 @@ exports.createPost = function(req, res) {
         if (err) throw err;
     });
     res.send(req.query);
-}
+};
 
 exports.replyPost = function(req, res) {
     // reply to Post
 
     res.send('post created');
-}
+};
