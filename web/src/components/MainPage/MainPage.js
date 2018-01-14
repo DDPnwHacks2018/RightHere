@@ -38,11 +38,11 @@ export default class MainPage extends React.Component {
 
                 {
                     this.posts.map((post) => {
-                        const replies = this.replies[post.id];
+                        const replies = this.replies[post._id];
                         return (
-                            <div className="row" key={post.id}>
+                            <div className="row" key={post._id}>
                                 <div className="col">
-                                    <Post time={post.time} text={post.text} images={post.images} replies={replies} />
+                                    <Post id={post._id} time={post.time} text={post.text} images={post.images} replies={replies} />
                                 </div>
                             </div>
                         );

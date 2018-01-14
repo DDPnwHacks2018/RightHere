@@ -36,12 +36,24 @@ const ServerAPI = {
     });
   },
 
-  pGetPosts: () => {
+  updateLocation: (loc) => {
+    readySocket();
+
+    const data = {
+      loc: loc,
+    };
+
+    socket.emit('update_user_loc', data, (data) => { });
+  },
+
+  pGetPosts: (loc) => {
     const apiUrl = "/posts";
     const url = BASE_URL + apiUrl;
-    const data = {};
+    const data = {
+      loc: loc,
+    };
 
-    return axios.get(url, data)
+    return axios.post(url, data)
       .then(function (response) {
         console.log(response.data);
 
@@ -52,41 +64,27 @@ const ServerAPI = {
       });
   },
 
-  getPosts: (callback) => {
-    const apiUrl = "/posts";
-    const url = BASE_URL + apiUrl;
-    const data = {};
-
-    axios.get(url, data)
-      .then(function (response) {
-        console.log(response.data);
-
-        callback(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },
-
-  createPost: (text, callback) => { // callback(data)
+  pCreatePost: (text, images, loc) => { // callback(data)
     const apiUrl = "/posts/create";
     const url = BASE_URL + apiUrl;
     const data = {
       text: text,
+      images: images,
+      loc: loc,
     };
 
-    axios.post(url, data)
+    return axios.post(url, data)
       .then(function (response) {
         console.log(response.data);
 
-        callback(response.data);
+        return response.data;
       })
       .catch(function (error) {
         console.log(error);
       });
   },
 
-  replyPost: (post_id, text, callback) => {
+  pReplyPost: (post_id, text) => {
     const apiUrl = "/posts/reply";
     const url = BASE_URL + apiUrl;
     const data = {
@@ -94,11 +92,11 @@ const ServerAPI = {
       text: text,
     };
 
-    axios.post(url, data)
+    return axios.post(url, data)
       .then(function (response) {
         console.log(response.data);
 
-        callback(response.data);
+        return response.data;
       })
       .catch(function (error) {
         console.log(error);

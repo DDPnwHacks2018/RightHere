@@ -105,6 +105,10 @@ img{
     border-top: 1px solid rgba(0,0,0,0.2);
 }
 
+.postPicture img {
+    max-height: 600px;
+}
+
 .replyCreate {
     padding: 2.5px;
 }

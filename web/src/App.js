@@ -7,6 +7,7 @@ import PostCreatePage from './components/PostCreatePage/PostCreatePage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 
 import serverAPI from './utils/serverAPI';
+import pGetGeolocation from './utils/pGetGeolocation';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -20,42 +21,91 @@ export default class App extends React.Component {
         this.onNewPost = this.onNewPost.bind(this);
         this.onNewReply = this.onNewReply.bind(this);
 
-        serverAPI.pGetPosts()
-            .then((data) => {
-                const _posts = [];
-                const _replies = {};
+        pGetGeolocation()
+            .then((location) => {
+                const loc = [
+                    parseFloat(location.lat),
+                    parseFloat(location.lng),
+                ];
 
-                data.posts.forEach((post) => {
-                    _posts.push(post.post);
-                    post.replies.forEach((reply) => {
-                        const post_id = reply.post_id;
-                        _replies[post_id] = _replies[post_id] || [];
-                        _replies[post_id].push(reply);
+                return serverAPI.pGetPosts(loc)
+                    .then((data) => {
+                        const _posts = [];
+                        const _replies = {};
+
+                        data.posts.forEach((post) => {
+                            const _post = {
+                                _id: post._id,
+                                loc: post.loc,
+                                time: post.time,
+                                text: post.text,
+                                images: post.images,
+                            };
+
+                            _posts.push(_post);
+                            post.replies.forEach((reply) => {
+                                const post_id = reply.post_id;
+                                _replies[post_id] = _replies[post_id] || [];
+                                _replies[post_id].push(reply);
+                            });
+                        });
+
+                        this.setState((prevState, props) => ({
+                            posts: _posts,
+                            replies: _replies,
+                        }));
+                    })
+                    .then(() => {
+                        serverAPI.onNewPost(this.onNewPost);
+                        serverAPI.onNewReply(this.onNewReply);
+
+                        console.log("listener registered");
                     });
-                });
-
-                this.setState((prevState, props) => ({
-                    posts: _posts,
-                    replies: _replies,
-                }));
-            })
-            .then(() => {
-                serverAPI.onNewPost(this.onNewPost);
-                serverAPI.onNewReply(this.onNewReply);
             });
     }
 
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => {
+                pGetGeolocation()
+                    .then((location) => {
+                        const loc = [
+                            parseFloat(location.lat),
+                            parseFloat(location.lng),
+                        ];
+                        serverAPI.updateLocation(loc);
+                    });
+            },
+            2000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
     onNewPost(data) {
+        console.log("new post: ", data);
+        const post = {
+            _id: data._id,
+            time: data.time,
+            loc: data.loc,
+            text: data.text,
+            images: data.images,
+        };
+
         this.setState((prevState, props) => ({
-            posts: [data.post].concat(prevState.posts),
+            posts: [post].concat(prevState.posts),
         }));
     }
 
     onNewReply(data) {
+        console.log("new reply: ", data);
+        const reply = data;
+
         this.setState((prevState, props) => {
             const replies = Object.assign({}, prevState.replies); // TODO: use deep copy
-            const reply = data.reply;
-            replies[reply.post_id] = replies[reply.post_id].concat([reply]);
+            replies[reply.post_id] = replies[reply.post_id] ? replies[reply.post_id].concat([reply]) : [reply];
             return {
                 replies: replies,
             };

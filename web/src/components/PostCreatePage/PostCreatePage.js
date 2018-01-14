@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 
 import PostCreateHeader from './PostCreateHeader';
 import ImageUpload from './ImageUpload';
 
 import pGetGeolocation from '../../utils/pGetGeolocation';
+import serverAPI from '../../utils/serverAPI';
 
 const pFileDataReader = (file) => {
     return new Promise((resolve, reject) => {
@@ -55,17 +55,13 @@ export default class PostCreatePage extends React.Component {
     onCreatePost() {
         console.log("PostCreatePage:onCreatePost");
 
-        const textData = this.textareaEle.value.trim();
-
         pGetGeolocation()
             .then((geolocation) => {
-                const data = {
-                    text: textData,
-                    images: this.state.imageDataUrl ? [this.state.imageDataUrl] : [],
-                    loc: [geolocation.lat, geolocation.lng],
-                };
-                console.log("PostCreatePage:onCreatePost: ", data);
-                // TODO, create post, jump back to main page
+                const text = this.textareaEle.value.trim();
+                const images = this.state.imageDataUrl ? [this.state.imageDataUrl] : [];
+                const loc = [geolocation.lat, geolocation.lng];
+
+                return serverAPI.pCreatePost(text, images, loc);
             })
             .then(() => {
                 this.props.history.push('/');
@@ -101,7 +97,7 @@ export default class PostCreatePage extends React.Component {
             <div className="container">
                 <PostCreateHeader onCreatePost={this.onCreatePost} />
                 <h3>Enter your Text</h3>
-                <textarea class="createTextContent" rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
+                <textarea className="createTextContent" rows="4" cols="60" ref={input => this.textareaEle = input}></textarea>
                 <ImageUpload
                     previewUrl={this.state.imageDataUrl}
                     onChange={this.onImageUploadChange} />
