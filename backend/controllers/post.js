@@ -57,7 +57,7 @@ exports.replyPost = function(req, res) {
     var post_id = req.body.post_id;
     
     //User.findOne({}, function(err, user) {
-        if (err) return res.send(false);
+        //if (err) return res.send(false);
         Post.findById(post_id, function(err, post) {
             if (err) return res.send(false);
             if (!post) return res.send(false);

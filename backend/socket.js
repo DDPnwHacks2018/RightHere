@@ -8,7 +8,7 @@ module.exports = function(server) {
 
     io.on('connection', function(socket){
         console.log('Someone connected to socket.');
-        socket.user_id = 0;
+        socket.started = false;
 
         socket.on('hello', function(){
             socket.emit('hello', "hello from backend");
@@ -24,8 +24,20 @@ module.exports = function(server) {
         });
 
         socket.on('update_user_loc', function(data){
-            // Update user data to db
-            helper.updateUserLoc(socket.id, data.loc);
+            if (socket.started === false) {
+                // Take down socket object to socket io
+                idToSocketObject[socket.id] = socket;
+
+                // Save use data to db
+                helper.createUserInfo(socket.id, data.loc);
+
+                // Set true
+                socket.started = true;
+            }
+            else {
+                // Update user data to db
+                helper.updateUserLoc(socket.id, data.loc);
+            }
         });
 
         socket.on('do_update_post', function(data){
