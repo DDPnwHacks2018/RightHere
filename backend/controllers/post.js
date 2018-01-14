@@ -14,6 +14,13 @@ exports.getPosts = function(req, res) {
             .populate('replies', '_id post_id time text')
             .exec(function(err, posts) {
             if (err) return res.send(false);
+            
+            // retrive image
+            /*
+            posts.forEach(function(post) {
+                post.images = imProcessor.getImages(post.images);
+            });
+            */
             res.json(posts);
         });
     });
@@ -64,11 +71,10 @@ exports.replyPost = function(req, res) {
             Reply.create(reply, function(err, re) {
                 if (err) return res.send(false);
                 post.update({ "$push": { "replies": re }}, function(err){
-                    if (err) res.send(false);
-                    else {
-                        socketC.emit("do_update_reply", JSON.stringify(re));
-                        res.send(true);
-                    }
+                    if (err) return res.send(false);
+
+                    socketC.emit("do_update_reply", JSON.stringify(re));
+                    res.send(true);
                 });
             });
         });
