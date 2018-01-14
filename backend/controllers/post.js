@@ -21,11 +21,15 @@ exports.getPosts = function(req, res) {
 
 exports.createPost = function(req, res) {
     // store the new post to db
-    console.log(req.body);
     var username = 'hls';
     User.findOne({name: username}, function(err, user) {
-        var post = req.query;
+        var post = req.body;
         post.author = user;
+        // store and compute image hash
+        console.log(post);
+        if (post.images) {
+            post.images = imProcessor.uploadImages(post.images);
+        }
         Post.create(post, function (err, new_post) {
             if (err) return res.send(false);
             console.log('saved');
@@ -45,14 +49,14 @@ exports.createPost = function(req, res) {
 exports.replyPost = function(req, res) {
     // reply to Post
     var username = "hls";
-    var post_id = req.query.post_id;
+    var post_id = req.body.post_id;
     
     User.findOne({name: username}, function(err, user) {
         if (err) return res.send(false);
-        Post.findById(req.query.post_id, function(err, post) {
+        Post.findById(req.body.post_id, function(err, post) {
             if (err) return res.send(false);
             var reply = {
-                text: req.query.text,
+                text: req.body.text,
                 author: user,
                 post_id: post
             };
